@@ -1,38 +1,67 @@
-.App {
-  text-align: center;
+body {
+  direction: rtl;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  /* background-color: lightgrey; */
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.header {
+  text-align: center;
+  padding: 20px;
+  width: 80%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.title {
+  color: #008080; /* Deeper green color */
+  margin-bottom: 10px;
+  font-family: system-ui;
+}
+
+.title-line {
+  width: 100%;
+  height: 2px;
+  background-color: #008080; /* Deeper green color */
+  margin-bottom: 20px;
+}
+
+.tabs {
+  /* display: flex; */
+  align-items: center;
+  margin-top: 10px;
+}
+
+.tab {
+  text-decoration: none;
+  color: black;
+  padding: 10px 50px;
+  transition: color 0.3s;
+  font-family: system-ui;
+}
+
+.tab:hover {
+  color: #1abc9c; /* Deeper green color */
+}
+
+.divider {
+  margin: 0 10px;
+  color: #ccc;
+}
+
+.main-content {
+  /* background-color: lightgrey; */
+  background-color: #f7f7f7; /* Highlighted background color */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  min-height: 100vh;
+  text-align: center;
 }

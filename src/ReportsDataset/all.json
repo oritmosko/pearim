@@ -1,0 +1,28 @@
+[
+  {
+    id: 0,
+    name: 'גוגל 2021',
+    reportUrl: 'www.static.googleusercontent.com/media/about.google/en//belonging/diversity-annual-report/2022/static/pdfs/google_israel_2021_binary_gender_pay_gap_report.pdf'
+  },
+  {
+    id: 1,
+    name: 'לאומי 2022',
+    reportUrl: 'www.leumi.co.il/static-files/10/LeumiHebrew/pdf_files/Equal_Report_2022_Acc.pdf'
+  }
+  // ,
+  // {
+  //   id: 2,
+  //   name: 'מיקרוסופט',
+  //   report_url: ''
+  // },
+  // {
+  //   id: 3,
+  //   name: 'אמזון',
+  //   report_url: ''
+  // },
+  // {
+  //   id: 4,
+  //   name: 'טוויטר',
+  //   report_url: ''
+  // }
+]
