@@ -13,6 +13,8 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
+import wordcloud from './wordcloud2.png';
+
 // Connect to backend server's URL
 const api = axios.create({
   baseURL: 'http://localhost:5000',
@@ -53,7 +55,7 @@ const Reports = () => {
       .then(response => {
         // console.log("Fetched JSON:", json.data);
         setReportsList(response.data);
-        setInputSearchString("ג")
+        // setInputSearchString("ג");
       })
       .catch(error => console.error('Error loading JSON:', error));
   }, []);
@@ -103,6 +105,10 @@ const Reports = () => {
             <a href={pdfUrl} className="link" target="_blank"> אתר החברה</a>
           </p>
         )}
+        {!pdfUrl && (
+          <img src={wordcloud} className="image-container" alt="Image"/>
+        )}
+
       </div>
     </div>
   );

@@ -40,3 +40,13 @@
 .link {
   color: #61dafb;
 }
+
+.image-container {
+  margin-top: 20px;
+  width: 600px;
+}
+@media (max-width: 768px) {
+  .image-container {
+    width: calc(100% - 10px);
+  }
+}
