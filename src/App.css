@@ -47,6 +47,12 @@ body {
   font-family: system-ui;
 }
 
+@media (max-width: 768px) {
+  .tab {
+    padding: 5px 10px;
+  }
+}
+
 .tab:hover {
   color: #1abc9c; /* Deeper green color */
 }
@@ -64,4 +70,9 @@ body {
   border-radius: 5px;
   min-height: 100vh;
   text-align: center;
+}
+@media (max-width: 768px) {
+  .main-content {
+    padding: 8px;
+  }
 }

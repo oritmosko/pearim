@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, TextField, Container, Typography, Box } from '@mui/material';
 
+import './Missing.css';
+
 const Missing = () => {
   const {
     register,
@@ -16,9 +18,8 @@ const Missing = () => {
   return (
     <div>
       <iframe
-        src="https://docs.google.com/forms/d/1Uo0TdrhR-HAqJgzIZbeqeMGV-QODjT7Q34b2HpNxFNU/viewform?embedded=true" // Replace with your Google Form URL
-        width="640"
-        height="900"
+        src="https://docs.google.com/forms/d/1Uo0TdrhR-HAqJgzIZbeqeMGV-QODjT7Q34b2HpNxFNU/viewform?embedded=true"
+        className="google-form"
         frameBorder="0"
         // marginheight="0"
         // marginwidth="0"

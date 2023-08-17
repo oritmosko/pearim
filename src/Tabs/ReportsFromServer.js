@@ -20,7 +20,7 @@ const api = axios.create({
 
 const Reports = () => {
   // Fetch single pdf report.
-  const defaultLayoutPluginInstance = defaultLayoutPlugin(); // Creating new plugin instance
+  const defaultLayoutPluginInstance = window.innerWidth < 768 ? "" : defaultLayoutPlugin(); // Creating new plugin instance
   const [pdfFile, setPdfFile] = useState(null); // Pdf file onChange state
   const [pdfUrl, setPdfUrl] = useState(null); // Pdf file URL state
 
