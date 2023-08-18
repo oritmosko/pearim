@@ -1,3 +1,5 @@
+Packages
+--------------------------------------------------------------------------------
 PDF:
 https://react-pdf-viewer.dev/docs/getting-started/
 
@@ -21,3 +23,16 @@ https://www.npmjs.com/package/react-search-autocomplete
 
 API calls:
 npm install axios
+
+Github Pages
+--------------------------------------------------------------------------------
+0. Enable pages on git repo
+1. Add to package.json:
+"homepage": "https://oritmosko.github.io/hello-world-app-tabs",
+"scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
+},
+2. Run:
+npm run deploy
+3. Choose gh-pages branch in git repo

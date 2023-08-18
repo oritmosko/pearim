@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import RightSidebar from './Components/RightSidebar';
@@ -30,6 +30,17 @@ const App = () => {
       tabContent = <Reports />;
   }
 
+  const [rightSidebarStyle, setRightSidebarStyle] = useState({}); // Default selected tab is Reports
+  useEffect(() => {
+    if (selectedTab == 'Reports') {
+      setRightSidebarStyle({});
+    } else {
+      setRightSidebarStyle({
+        display: 'none'
+      });
+    }
+  }, [selectedTab]);
+
   return (
     <SearchProvider>
       <div>
@@ -49,7 +60,9 @@ const App = () => {
             </header>
           </div>
           <div className="main-content">
-            <RightSidebar />
+            <div style={rightSidebarStyle}>
+              <RightSidebar />
+            </div>
             {tabContent}
           </div>
         </div>
