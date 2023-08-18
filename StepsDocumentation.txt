@@ -36,3 +36,9 @@ Github Pages
 2. Run:
 npm run deploy
 3. Choose gh-pages branch in git repo
+
+Git Commits
+--------------------------------------------------------------------------------
+git add .
+git commit -m "..."
+git push -u origin main
