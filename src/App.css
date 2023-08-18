@@ -16,8 +16,7 @@ body {
 
 .header-image-container {
   margin-right: 30px;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-left: 20px;
   width: 100px;
 }
 @media (max-width: 768px) {

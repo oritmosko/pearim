@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
 import './App.css';
 
-// import Reports from './Tabs/Reports';
+import RightSidebar from './Components/RightSidebar';
+import { SearchProvider } from './Context/SearchContext';
 import Reports from './Tabs/ReportsFromServer';
-// import Missing from './Tabs/Missing';
 import Missing from './Tabs/MissingWithGoogleForms';
 import QNA from './Tabs/QNA';
 import About from './Tabs/About';
-
-import RightSidebar from './Components/RightSidebar';
-
-import { SearchProvider } from './Context/SearchContext';
-
 import wordcloud from './assets/wordcloud2.png';
 
 const App = () => {
-  const [selectedTab, setSelectedTab] = useState('Reports'); // Default selected tab is Tab1
+  const [selectedTab, setSelectedTab] = useState('Reports'); // Default selected tab is Reports
 
   let tabContent;
-
-  // Based on the selected tab, assign the corresponding component
   switch (selectedTab) {
     case 'Reports':
       tabContent = <Reports />;
@@ -34,11 +27,8 @@ const App = () => {
       tabContent = <About />;
       break;
     default:
-      tabContent = <About />; // Default to Tab1
+      tabContent = <Reports />;
   }
-
-  // <span className="divider">|</span>
-  // <a href="#" className="tab" onClick={() => setSelectedTab('About')}>אודות</a>
 
   return (
     <SearchProvider>

@@ -1,7 +1,6 @@
 .google-form {
   width: 640px;
   height: 900px;
-  /* frameBorder: "0"; */
 }
 @media (max-width: 768px) {
   .google-form {

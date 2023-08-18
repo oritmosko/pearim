@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-import { useSearch } from '../Context/SearchContext';
-
 import './RightSidebar.css';
 
+import axios from 'axios';
+import { SERVER_PATH } from '../Config/ServerConfig';
+import { useSearch } from '../Context/SearchContext';
 import wordcloud from '../assets/wordcloud2.png';
 
 // Connect to backend server's URL
 const api = axios.create({
-  baseURL: 'http://localhost:5000',
-  // baseURL: 'https://hello-world-app-server-4zpqlhbhaa-ew.a.run.app'
+  baseURL: SERVER_PATH
 });
 
 const RightSidebar = () => {
