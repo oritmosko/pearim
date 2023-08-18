@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { useSearch } from '../Context/SearchContext';
+
 import './Reports.css';
 
 // Import Search Bar
@@ -13,11 +15,12 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
-import wordcloud from './wordcloud2.png';
+import wordcloud from '../assets/wordcloud2.png';
 
 // Connect to backend server's URL
 const api = axios.create({
   baseURL: 'http://localhost:5000',
+  // baseURL: 'https://hello-world-app-server-4zpqlhbhaa-ew.a.run.app'
 });
 
 const Reports = () => {
@@ -75,6 +78,14 @@ const Reports = () => {
       </>
     )
   }
+  const { searchTerm } = useSearch();
+  useEffect(() => {
+    // console.log("searchTerm updated:", searchTerm);
+    if (searchTerm) {
+      setInputSearchString(searchTerm.fullName + " ");
+      handleOnSelect(searchTerm);
+    }
+  });
 
   return (
     <div className="reports-content">
@@ -105,7 +116,7 @@ const Reports = () => {
             <a href={pdfUrl} className="link" target="_blank"> אתר החברה</a>
           </p>
         )}
-        {!pdfUrl && (
+        {!pdfFile && (
           <img src={wordcloud} className="image-container" alt="Image"/>
         )}
 

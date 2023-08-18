@@ -6,18 +6,35 @@ body {
   font-family: system-ui;
 }
 
-.container {
+.header-container {
   /* background-color: lightgrey; */
   /* min-height: 100vh; */
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
+}
+
+.header-image-container {
+  margin-right: 30px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  width: 100px;
+}
+@media (max-width: 768px) {
+  .header-image-container {
+    display: none;
+  }
 }
 
 .header {
   text-align: center;
   padding: 20px;
   width: 80%;
+}
+@media (max-width: 768px) {
+  .header {
+    width: 100%;
+  }
 }
 
 .title {

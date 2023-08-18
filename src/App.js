@@ -8,6 +8,12 @@ import Missing from './Tabs/MissingWithGoogleForms';
 import QNA from './Tabs/QNA';
 import About from './Tabs/About';
 
+import RightSidebar from './Components/RightSidebar';
+
+import { SearchProvider } from './Context/SearchContext';
+
+import wordcloud from './assets/wordcloud2.png';
+
 const App = () => {
   const [selectedTab, setSelectedTab] = useState('Reports'); // Default selected tab is Tab1
 
@@ -35,24 +41,30 @@ const App = () => {
   // <a href="#" className="tab" onClick={() => setSelectedTab('About')}>אודות</a>
 
   return (
-    <div>
-      <div className="container">
-        <header className="header">
-          <h1 className="title">דו"ח שכר (לא) שווה לעובדת ולעובד</h1>
-          <div className="title-line"></div>
-          <nav className="tabs">
-            <a href="#" className="tab" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
-            <span className="divider">|</span>
-            <a href="#" className="tab" onClick={() => setSelectedTab('Missing')}>חסרה חברה?</a>
-            <span className="divider">|</span>
-            <a href="#" className="tab" onClick={() => setSelectedTab('QNA')}>שאלות</a>
-          </nav>
-        </header>
+    <SearchProvider>
+      <div>
+        <div>
+          <div className="header-container">
+            <img src={wordcloud} className="header-image-container" alt="Image"/>
+            <header className="header">
+              <h1 className="title">דו"ח שכר (לא) שווה לעובדת ולעובד</h1>
+              <div className="title-line"></div>
+              <nav className="tabs">
+                <a href="#" className="tab" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
+                <span className="divider">|</span>
+                <a href="#" className="tab" onClick={() => setSelectedTab('Missing')}>חסרה חברה?</a>
+                <span className="divider">|</span>
+                <a href="#" className="tab" onClick={() => setSelectedTab('QNA')}>שאלות</a>
+              </nav>
+            </header>
+          </div>
+          <div className="main-content">
+            <RightSidebar />
+            {tabContent}
+          </div>
+        </div>
       </div>
-      <div className="main-content">
-        {tabContent}
-      </div>
-    </div>
+    </SearchProvider>
   );
 };
 
