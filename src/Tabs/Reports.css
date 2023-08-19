@@ -37,12 +37,12 @@
   align-items: center; */
   background-color: #f7f7f7;
   width: 900px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   /* height: 100vh; */
 }
 @media (max-width: 768px) {
   .selected-item {
-    width: calc(100% - 10px);
+    width: 100%;
   }
 }
 

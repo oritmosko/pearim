@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Keyboard } from 'react-native';
 import './Reports.css';
 
 import axios from 'axios';
@@ -35,6 +36,7 @@ const Reports = () => {
   // Callbacks for search items.
   const [selectedReport, setSelectedReport] = useState(null);
   const handleOnSelect = (report) => {
+    Keyboard.dismiss();
     setSelectedReport(report);
     handleFetchPdf(report.reportUrl);
   };
@@ -57,13 +59,17 @@ const Reports = () => {
   });
 
   // Fetch single pdf report.
-  const defaultLayoutPluginInstance = window.innerWidth < 768 ? "" : defaultLayoutPlugin(); // Creating new plugin instance
-  // TODO(oritmosko): Add zoom plugin for mobile
+  const defaultLayoutPluginInstance = defaultLayoutPlugin({
+    sidebarTabs: (defaultTabs) => []
+  });
+  const defaultScale = window.innerWidth < 768 ? 1.3 : 0;
+
   const [pdfFile, setPdfFile] = useState(null); // Pdf file onChange state
   const [pdfUrl, setPdfUrl] = useState(null); // Pdf file URL state
 
   const handleFetchPdf = async (reportUrl) => {
     try {
+      setPdfUrl(reportUrl);
       const response = await api.get('/api/fetchPdf', {
         params: { url: reportUrl },
         responseType: 'arraybuffer',
@@ -74,11 +80,9 @@ const Reports = () => {
       reader.readAsDataURL(pdfBlob);
       reader.onloadend = (e) => {
         setPdfFile(e.target.result);
-        setPdfUrl(null);
       }
     } catch (error) {
       setPdfFile(null);
-      setPdfUrl(reportUrl);
       // console.error('Error fetching PDF:', error);
     }
   };
@@ -108,10 +112,17 @@ const Reports = () => {
       </div>
       <div className="selected-item">
         {pdfFile && (
-          <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-            <Viewer fileUrl={pdfFile} plugins={[defaultLayoutPluginInstance]}>
-            </Viewer>
-          </Worker>
+          <div>
+            {pdfUrl && (
+              <p> לדו"ח המקורי ב
+                <a href={pdfUrl} className="link" target="_blank">אתר החברה</a>
+              </p>
+            )}
+            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+              <Viewer fileUrl={pdfFile} plugins={[defaultLayoutPluginInstance]} defaultScale={defaultScale}>
+              </Viewer>
+            </Worker>
+          </div>
         )}
         {pdfUrl && (
           <p> לא ניתן לטעון את הדו"ח, ניתן לצפות בו ישירות דרך
