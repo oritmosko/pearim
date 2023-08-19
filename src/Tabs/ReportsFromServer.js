@@ -94,7 +94,12 @@ const Reports = () => {
           // onFocus={handleOnFocus}
           onSelect={handleOnSelect}
           inputSearchString={inputSearchString}
-          fuseOptions={{ keys: ["name", "engName", "year"] }}
+          fuseOptions={{
+            keys: ["name", "engName", "year"],
+            threshold: 0.0,
+            isCaseSensitive: false,
+            ignoreLocation: true
+          }}
           resultStringKeyName="fullName"
           autoFocus
           formatResult={formatResult}
