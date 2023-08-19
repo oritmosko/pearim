@@ -21,7 +21,16 @@
     margin-top: 0px;
   }
 }
-
+.react-autosuggest__suggestions-list
+{
+  max-height: 200px;
+  overflow-y: auto;
+}
+.react-search-autocomplete-dropdown-container div div:nth-child(2) {
+  max-height: 200px;
+  overflow-y: auto;
+  /* overflow-x: visible; */
+}
 .selected-item {
   /* display: flex;
   flex-direction: column;
@@ -29,7 +38,7 @@
   background-color: #f7f7f7;
   width: 900px;
   margin-top: 20px;
-  height: 100vh;
+  /* height: 100vh; */
 }
 @media (max-width: 768px) {
   .selected-item {

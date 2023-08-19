@@ -81,7 +81,7 @@ body {
 .main-content {
   /* background-color: lightgrey; */
   background-color: #f7f7f7; /* Highlighted background color */
-  padding: 20px;
+  /* padding: 20px; */
   border: 1px solid #ddd;
   border-radius: 5px;
   min-height: 100vh;

@@ -58,6 +58,7 @@ const Reports = () => {
 
   // Fetch single pdf report.
   const defaultLayoutPluginInstance = window.innerWidth < 768 ? "" : defaultLayoutPlugin(); // Creating new plugin instance
+  // TODO(oritmosko): Add zoom plugin for mobile
   const [pdfFile, setPdfFile] = useState(null); // Pdf file onChange state
   const [pdfUrl, setPdfUrl] = useState(null); // Pdf file URL state
 
@@ -87,6 +88,7 @@ const Reports = () => {
       <div className="search-bar">
         <ReactSearchAutocomplete
           items={reportsList}
+          className="react-search-autocomplete-dropdown-container"
           // onSearch={handleOnSearch}
           // onHover={handleOnHover}
           // onFocus={handleOnFocus}
@@ -96,6 +98,7 @@ const Reports = () => {
           resultStringKeyName="fullName"
           autoFocus
           formatResult={formatResult}
+          maxResults={200}
         />
       </div>
       <div className="selected-item">
