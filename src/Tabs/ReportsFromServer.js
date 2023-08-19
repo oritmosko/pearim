@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Keyboard } from 'react-native';
 import './Reports.css';
 
 import axios from 'axios';
@@ -36,7 +35,7 @@ const Reports = () => {
   // Callbacks for search items.
   const [selectedReport, setSelectedReport] = useState(null);
   const handleOnSelect = (report) => {
-    Keyboard.dismiss();
+    document.querySelector('input').blur();
     setSelectedReport(report);
     handleFetchPdf(report.reportUrl);
   };
