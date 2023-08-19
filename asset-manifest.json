@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/hello-world-app-tabs/static/css/main.f2a18ad2.css",
-    "main.js": "/hello-world-app-tabs/static/js/main.1ba923b9.js",
+    "main.js": "/hello-world-app-tabs/static/js/main.2c7275ff.js",
     "static/js/787.028b954c.chunk.js": "/hello-world-app-tabs/static/js/787.028b954c.chunk.js",
     "static/media/wordcloud2.png": "/hello-world-app-tabs/static/media/wordcloud2.f00a5bec9be7cd5e814d.png",
     "index.html": "/hello-world-app-tabs/index.html",
     "main.f2a18ad2.css.map": "/hello-world-app-tabs/static/css/main.f2a18ad2.css.map",
-    "main.1ba923b9.js.map": "/hello-world-app-tabs/static/js/main.1ba923b9.js.map",
+    "main.2c7275ff.js.map": "/hello-world-app-tabs/static/js/main.2c7275ff.js.map",
     "787.028b954c.chunk.js.map": "/hello-world-app-tabs/static/js/787.028b954c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f2a18ad2.css",
-    "static/js/main.1ba923b9.js"
+    "static/js/main.2c7275ff.js"
   ]
 }
