@@ -41,6 +41,11 @@ body {
   margin-bottom: 10px;
   font-family: system-ui;
 }
+@media (max-width: 768px) {
+  .title {
+    font-size: 22px;
+  }
+}
 
 .title-line {
   width: 100%;

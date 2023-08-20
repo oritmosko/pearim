@@ -30,7 +30,7 @@ const RightSidebar = () => {
   };
 
 //         <li className="sidebar-category">Category 1</li>
-  return window.innerWidth < 768 ?
+  return window.innerWidth < 1280 ?
   (<div/>) :
   (
     <div className="right-sidebar">

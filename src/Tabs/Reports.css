@@ -15,10 +15,17 @@
   width: 30%;
   margin-top: 20px;
 }
+@media (max-width: 1600px) {
+  .search-bar {
+    width: 50%;
+    margin-right: 80px;
+  }
+}
 @media (max-width: 768px) {
   .search-bar {
     width: 90%;
-    margin-top: 0px;
+    margin-top: 10px;
+    margin-right: 0px;
   }
 }
 .react-autosuggest__suggestions-list
@@ -40,8 +47,15 @@
   /* margin-top: 20px; */
   /* height: 100vh; */
 }
-@media (max-width: 768px) {
+@media (max-width: 1630px) {
   .selected-item {
+    margin-right: 320px;
+    /* width: 100%; */
+  }
+}
+@media (max-width: 1280px) {
+  .selected-item {
+    margin-right: 0px;
     width: 100%;
   }
 }
