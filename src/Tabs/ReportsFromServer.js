@@ -33,11 +33,10 @@ const Reports = () => {
   }, []);
 
   // Callbacks for search items.
-  const [selectedReport, setSelectedReport] = useState(null);
   const handleOnSelect = (report) => {
     document.querySelector('input').blur();
-    setSelectedReport(report);
-    handleFetchPdf(report.reportUrl);
+    handleFetchReport(report);
+    // debugger;
   };
   const formatResult = (report) => {
     return (
@@ -65,12 +64,19 @@ const Reports = () => {
 
   const [pdfFile, setPdfFile] = useState(null); // Pdf file onChange state
   const [pdfUrl, setPdfUrl] = useState(null); // Pdf file URL state
+  const [reportPageNum, setReportPageNum] = useState(0);
 
-  const handleFetchPdf = async (reportUrl) => {
+  const handleFetchReport = async (report) => {
+    if (report.reportUrl == pdfUrl) {
+      if (report.hasOwnProperty('pageNumber')) {
+        setReportPageNum(report.pageNumber);
+      }
+      return;
+    }
     try {
-      setPdfUrl(reportUrl);
+      setPdfUrl(report.reportUrl);
       const response = await api.get('/api/fetchPdf', {
-        params: { url: reportUrl },
+        params: { url: report.reportUrl },
         responseType: 'arraybuffer',
       });
 
@@ -79,6 +85,9 @@ const Reports = () => {
       reader.readAsDataURL(pdfBlob);
       reader.onloadend = (e) => {
         setPdfFile(e.target.result);
+        if (report.hasOwnProperty('pageNumber')) {
+          setReportPageNum(report.pageNumber);
+        }
       }
     } catch (error) {
       setPdfFile(null);
@@ -111,14 +120,18 @@ const Reports = () => {
       </div>
       <div className="selected-item">
         {pdfFile && (
-          <div>
+          <div className="pdf-file-container">
             {pdfUrl && (
               <p> לדו"ח המקורי ב
                 <a href={pdfUrl} className="link" target="_blank">אתר החברה</a>
               </p>
             )}
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-              <Viewer fileUrl={pdfFile} plugins={[defaultLayoutPluginInstance]} defaultScale={defaultScale}>
+              <Viewer fileUrl={pdfFile}
+                      plugins={[defaultLayoutPluginInstance]}
+                      enableSmoothScroll={false}
+                      defaultScale={defaultScale}
+                      initialPage={reportPageNum}>
               </Viewer>
             </Worker>
           </div>

@@ -1,0 +1,69 @@
+.category {
+  overflow: hidden;
+  align-items: baseline;
+}
+.category:hover {
+  background-color: #f5f5f5; /* Add hover background color */
+  cursor: pointer;
+}
+
+.category h4 {
+  text-align: right;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+.category ul {
+  list-style: none; /* Remove the default list-style bullets */
+  padding: 0;
+  margin: 0;
+}
+
+.category-items {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.category-items.expanded {
+  max-height: 1000px;
+}
+
+.search-container {
+  position: relative;
+}
+
+.text-input {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 30px 10px 40px; /* Add left padding for the icon */
+  font-size: 14px;
+  color: #333;
+  max-width: 100%;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition-property: background-color, box-shadow, width;
+
+  /* Add small padding on hover for a subtle effect */
+  &:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.text-input::placeholder {
+  color: #888; /* Placeholder color */
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888; /* Icon color */
+  cursor: pointer;
+}

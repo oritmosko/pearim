@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './RightSidebar.css';
 
 import axios from 'axios';
+import CollapsibleCategorizedList from './CollapsibleCategorizedList';
 import { SERVER_PATH } from '../Config/ServerConfig';
 import { useSearch } from '../Context/SearchContext';
 import wordcloud from '../assets/wordcloud2.png';
@@ -34,6 +35,7 @@ const RightSidebar = () => {
   (<div/>) :
   (
     <div className="right-sidebar">
+      <CollapsibleCategorizedList />
       <ul className="sidebar-list">
         {reportsList.map((report, index) => (
           <li key={index} onClick={() => handleItemClick(report)}>
