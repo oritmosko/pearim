@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import RightSidebar from './Components/RightSidebar';
-import { SearchProvider } from './Context/SearchContext';
+import { ChosenReportProvider } from './Context/ChosenReportContext';
 import Reports from './Tabs/ReportsFromServer';
 import Missing from './Tabs/MissingWithGoogleForms';
 import QNA from './Tabs/QNA';
@@ -42,7 +42,7 @@ const App = () => {
   }, [selectedTab]);
 
   return (
-    <SearchProvider>
+    <ChosenReportProvider>
       <div>
         <div>
           <div className="header-container">
@@ -67,7 +67,7 @@ const App = () => {
           </div>
         </div>
       </div>
-    </SearchProvider>
+    </ChosenReportProvider>
   );
 };
 

@@ -4,11 +4,11 @@ import './Reports.css';
 import axios from 'axios';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'; // Search Bar
 import { SERVER_PATH } from '../Config/ServerConfig';
-import { useSearch } from '../Context/SearchContext';
+import { useChosenReport } from '../Context/ChosenReportContext';
 import wordcloud from '../assets/wordcloud2.png';
 // Import Pdf related
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
-import { Viewer } from '@react-pdf-viewer/core';
+import { SpecialZoomLevel, Viewer } from '@react-pdf-viewer/core';
 import { Worker } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
@@ -32,36 +32,68 @@ const Reports = () => {
       .catch(error => console.error('Error loading JSON:', error));
   }, []);
 
-  // Callbacks for search items.
-  const handleOnSelect = (report) => {
-    document.querySelector('input').blur();
-    debugger;
-    handleFetchReport(report);
-    // debugger;
-  };
-  const formatResult = (report) => {
-    return (
-      <>
-        <span style={{ display: 'block', textAlign: 'right' }}>
-          {report.fullName}
-        </span>
-      </>
-    )
-  }
-  const { searchTerm } = useSearch();
+  const { chosenReport } = useChosenReport();
   useEffect(() => {
-    // console.log("searchTerm updated:", searchTerm);
-    if (searchTerm) {
-      setInputSearchString(searchTerm.fullName + " ");
-      handleOnSelect(searchTerm);
+    if (chosenReport) {
+      handleFetchReport(chosenReport);
     }
   });
 
   // Fetch single pdf report.
+  const renderToolbar = (Toolbar: (props: ToolbarProps) => ReactElement) => (
+      <Toolbar>
+         {(slots: ToolbarSlot) => {
+           const {
+             CurrentPageInput,
+             Download,
+             GoToNextPage,
+             GoToPreviousPage,
+             NumberOfPages,
+             Zoom,
+             ZoomIn,
+             ZoomOut,
+           } = slots;
+
+           return (
+             <div style={{ alignItems: 'center',
+                           display: 'flex',
+                           width: '100%',
+                         }}>
+               <div style={{ padding: '0px 2px' }}>
+                   <GoToPreviousPage />
+               </div>
+               <div style={{ padding: '0px 2px', width: '4rem' }}>
+                   <CurrentPageInput />
+               </div>
+               <div style={{ padding: '0px 2px' }}>
+                   / <NumberOfPages />
+               </div>
+               <div style={{ padding: '0px 2px' }}>
+                   <GoToNextPage />
+               </div>
+               <div style={{ padding: '0px 2px', marginRight: 'auto' }}>
+                   <ZoomOut />
+               </div>
+               <div style={{ padding: '0px 2px' }}>
+                   <Zoom />
+               </div>
+               <div style={{ padding: '0px 2px', marginLeft: 'auto' }}>
+                   <ZoomIn />
+               </div>
+               <div style={{ padding: '0px 22px 0 2px' }}>
+                   <Download />
+               </div>
+             </div>
+           );
+         }}
+       </Toolbar>
+     );
   const defaultLayoutPluginInstance = defaultLayoutPlugin({
-    sidebarTabs: (defaultTabs) => []
+    sidebarTabs: (defaultTabs) => [],
+    renderToolbar
   });
-  const defaultScale = window.innerWidth < 768 ? 1.3 : 0;
+  const layoutPluginInstances = [defaultLayoutPluginInstance]
+  const defaultScale = SpecialZoomLevel.PageWidth;
 
   const [pdfFile, setPdfFile] = useState(null); // Pdf file onChange state
   const [pdfUrl, setPdfUrl] = useState(null); // Pdf file URL state
@@ -92,10 +124,10 @@ const Reports = () => {
       }
     } catch (error) {
       setPdfFile(null);
-      // console.error('Error fetching PDF:', error);
     }
   };
 
+  // TODO(oritmosko): If smaller than 768, render the CollapsibleList
   return (
     <div className="reports-content">
       <div className="selected-item">
@@ -108,7 +140,7 @@ const Reports = () => {
             )}
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
               <Viewer fileUrl={pdfFile}
-                      plugins={[defaultLayoutPluginInstance]}
+                      plugins={layoutPluginInstances}
                       enableSmoothScroll={false}
                       defaultScale={defaultScale}
                       initialPage={reportPageNum}>
@@ -116,7 +148,7 @@ const Reports = () => {
             </Worker>
           </div>
         )}
-        {pdfUrl && (
+        {!pdfFile && pdfUrl && (
           <p> לא ניתן לטעון את הדו"ח, ניתן לצפות בו ישירות דרך
             <a href={pdfUrl} className="link" target="_blank"> אתר החברה</a>
           </p>

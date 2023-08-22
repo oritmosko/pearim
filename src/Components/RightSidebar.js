@@ -4,7 +4,7 @@ import './RightSidebar.css';
 import axios from 'axios';
 import CollapsibleCategorizedList from './CollapsibleCategorizedList';
 import { SERVER_PATH } from '../Config/ServerConfig';
-import { useSearch } from '../Context/SearchContext';
+import { useChosenReport } from '../Context/ChosenReportContext';
 import wordcloud from '../assets/wordcloud2.png';
 
 // Connect to backend server's URL
@@ -25,14 +25,12 @@ const RightSidebar = () => {
       .catch(error => console.error('Error loading JSON:', error));
   }, []);
 
-  const { setSearchTerm } = useSearch();
+  const { setChosenReport } = useChosenReport();
   const handleItemClick = (report) => {
-    debugger;
-    setSearchTerm(report); // Set the search term when an item is clicked
+    setChosenReport(report); // Set the search term when an item is clicked
   };
 
-//         <li className="sidebar-category">Category 1</li>
-  return window.innerWidth < 1280 ?
+  return window.innerWidth < 768 ?
   (<div/>) :
   (
     <div className="right-sidebar">
