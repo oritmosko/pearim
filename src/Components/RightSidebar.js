@@ -26,8 +26,9 @@ const RightSidebar = () => {
   }, []);
 
   const { setSearchTerm } = useSearch();
-  const handleItemClick = (item) => {
-    setSearchTerm(item); // Set the search term when an item is clicked
+  const handleItemClick = (report) => {
+    debugger;
+    setSearchTerm(report); // Set the search term when an item is clicked
   };
 
 //         <li className="sidebar-category">Category 1</li>
@@ -35,39 +36,8 @@ const RightSidebar = () => {
   (<div/>) :
   (
     <div className="right-sidebar">
-      <CollapsibleCategorizedList />
-      <ul className="sidebar-list">
-        {reportsList.map((report, index) => (
-          <li key={index} onClick={() => handleItemClick(report)}>
-            {report.fullName}
-          </li>
-        ))}
-        {reportsList.map((report, index) => (
-          <li key={index} onClick={() => handleItemClick(report)}>
-            {report.fullName}
-          </li>
-        ))}
-        {reportsList.map((report, index) => (
-          <li key={index} onClick={() => handleItemClick(report)}>
-            {report.fullName}
-          </li>
-        ))}
-        {reportsList.map((report, index) => (
-          <li key={index} onClick={() => handleItemClick(report)}>
-            {report.fullName}
-          </li>
-        ))}
-        {reportsList.map((report, index) => (
-          <li key={index} onClick={() => handleItemClick(report)}>
-            {report.fullName}
-          </li>
-        ))}
-        {reportsList.map((report, index) => (
-          <li key={index} onClick={() => handleItemClick(report)}>
-            {report.fullName}
-          </li>
-        ))}
-      </ul>
+      <CollapsibleCategorizedList reports={reportsList}
+                                  onClickCallback={(report, index) => handleItemClick(report)}/>
     </div>
   );
 };

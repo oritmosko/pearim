@@ -3,7 +3,7 @@ import './CollapsibleCategorizedList.css';
 
 import { Search } from '@mui/icons-material'; // Import the search icon from Material-UI
 
-const CollapsibleList = ({ data, searchTerm }) => {
+const CollapsibleList = ({ reports, searchTerm, onClickCallback }) => {
   const [expandedCategories, setExpandedCategories] = useState([]);
 
   const toggleCategory = (category) => {
@@ -14,9 +14,9 @@ const CollapsibleList = ({ data, searchTerm }) => {
     }
   };
 
-  const filteredData = data.map(categoryData => {
-    const filteredItems = categoryData.items.filter(item =>
-      item.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredReports = reports.map(reportsCategory => {
+    const filteredItems = reportsCategory.reports.filter(report =>
+      report.fullName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     if (filteredItems.length === 0) {
@@ -29,21 +29,25 @@ const CollapsibleList = ({ data, searchTerm }) => {
     // }
 
     return {
-      ...categoryData,
+      ...reportsCategory,
       items: filteredItems,
     };
-  }).filter(categoryData => categoryData !== null);
+  }).filter(reportsCategory => reportsCategory !== null);
 
   return (
     <div>
-      {filteredData.map((categoryData) => (
-        <div key={categoryData.category} className="category">
-          <h4 onClick={() => toggleCategory(categoryData.category)}>
-            {categoryData.category}
+      {filteredReports.map((reportsCategory) => (
+        <div key={reportsCategory.category}
+             className={`category ${expandedCategories.includes(reportsCategory.category) || searchTerm != ""  ? 'expanded' : ''}`}>
+          <h4 onClick={() => toggleCategory(reportsCategory.category)}>
+            <i className={`arrow ${expandedCategories.includes(reportsCategory.category) || searchTerm != ""  ? 'down' : 'left'}`}></i>
+            {reportsCategory.category}
           </h4>
-          <ul className={`category-items ${expandedCategories.includes(categoryData.category) ? 'expanded' : ''}`}>
-            {categoryData.items.map((item, index) => (
-              <li key={index}>{item}</li>
+          <ul className={`category-items ${expandedCategories.includes(reportsCategory.category) || searchTerm != ""  ? 'expanded' : ''}`}>
+            {reportsCategory.reports.map((report, index) => (
+              <li key={index} onClick={() => onClickCallback(report)}>
+                {report.fullName}
+              </li>
             ))}
           </ul>
         </div>
@@ -52,22 +56,11 @@ const CollapsibleList = ({ data, searchTerm }) => {
   );
 };
 
-const App = () => {
-  const sampleData = [
-    {
-      category: '> ציבורי',
-      items: ['Item A', 'Item B', 'Item C'],
-    },
-    {
-      category: '> הייטק',
-      items: ['Item X', 'Item Y', 'Item Z'],
-    },
-  ];
-
+const CollapsibleListWithSearch = ({ reports, onClickCallback }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <div className="app-container">
+    <div >
       <div className="search-container">
         <Search className="search-icon" fontSize="small" />
         <input
@@ -75,13 +68,13 @@ const App = () => {
           placeholder="חפש.י חברה"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="text-input" // Apply your CSS class here
+          className="text-input"
         />
       </div>
-      <CollapsibleList data={sampleData} searchTerm={searchTerm} />
+      <CollapsibleList reports={reports} searchTerm={searchTerm} onClickCallback={onClickCallback} />
     </div>
   );
 
 };
 
-export default App;
+export default CollapsibleListWithSearch;

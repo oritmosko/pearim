@@ -35,6 +35,7 @@ const Reports = () => {
   // Callbacks for search items.
   const handleOnSelect = (report) => {
     document.querySelector('input').blur();
+    debugger;
     handleFetchReport(report);
     // debugger;
   };
@@ -97,27 +98,6 @@ const Reports = () => {
 
   return (
     <div className="reports-content">
-      <div className="search-bar">
-        <ReactSearchAutocomplete
-          items={reportsList}
-          className="react-search-autocomplete-dropdown-container"
-          // onSearch={handleOnSearch}
-          // onHover={handleOnHover}
-          // onFocus={handleOnFocus}
-          onSelect={handleOnSelect}
-          inputSearchString={inputSearchString}
-          fuseOptions={{
-            keys: ["name", "engName", "year"],
-            threshold: 0.0,
-            isCaseSensitive: false,
-            ignoreLocation: true
-          }}
-          resultStringKeyName="fullName"
-          autoFocus
-          formatResult={formatResult}
-          maxResults={200}
-        />
-      </div>
       <div className="selected-item">
         {pdfFile && (
           <div className="pdf-file-container">
