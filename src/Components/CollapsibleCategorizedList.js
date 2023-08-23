@@ -10,7 +10,7 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback }) => {
     if (expandedCategories.includes(category)) {
       setExpandedCategories(expandedCategories.filter(cat => cat !== category));
     } else {
-      setExpandedCategories([...expandedCategories, category]);
+      setExpandedCategories([category]); // ...expandedCategories,
     }
   };
 
@@ -25,13 +25,15 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback }) => {
     reportsCategory.reports.forEach(report => {
       let nameMatch = report.fullName.includes(searchWord) || report.engName.includes(searchWord);
       let pageNamesMatches = 0;
-      report.morePages.forEach(page => {
-        page.display = false;
-        if (page.name.includes(searchWord)) {
-          pageNamesMatches += 1;
-          page.display = true;
-        }
-      });
+      if (report.hasOwnProperty('morePages')) {
+        report.morePages.forEach(page => {
+          page.display = false;
+          if (page.name.includes(searchWord)) {
+            pageNamesMatches += 1;
+            page.display = true;
+          }
+        });
+      }
 
       if (nameMatch || pageNamesMatches > 0) {
         filteredReports.push(report);
@@ -64,12 +66,12 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback }) => {
           </h4>
           <ul className={`category-items ${expandedCategories.includes(reportsCategory.category) || searchTerm != ""  ? 'expanded' : ''}`}>
             {reportsCategory.reports.map((report, index) => (
-              <div key={`{report.fullName}_pages`}>
+              <div key={`${report.fullName}_pages`}>
                 <li key={report.fullName}
                     onClick={() => onClickCallback(report)}>
                   {report.fullName}
                 </li>
-                {report.morePages.map((page) => (
+                {report.morePages && report.morePages.map((page) => (
                   <li key={page.name}
                       className={`more-pages ${page.display}`}
                       onClick={() => onClickCallback(report, page.page)}>

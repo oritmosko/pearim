@@ -38,6 +38,7 @@ const Reports = () => {
   }, [chosenReport, chosenReportPage]);
 
   // Fetch single pdf report.
+  const [originUrl, setOriginUrl] = useState(null); // Pdf file URL state
   const [pdfFile, setPdfFile] = useState(null); // Pdf file onChange state
   const [pdfUrl, setPdfUrl] = useState(null); // Pdf file URL state
   const [reportPageNum, setReportPageNum] = useState(0);
@@ -57,6 +58,7 @@ const Reports = () => {
     }
     try {
       setPdfUrl(report.reportUrl);
+      setOriginUrl(report.originUrl);
       setPdfFile(null);
       const response = await api.get('/api/fetchPdf', {
         params: { url: report.reportUrl },
@@ -139,8 +141,8 @@ const Reports = () => {
         {pdfFile && (
           <div className={`pdf-file-container ${reportPageNum}`}>
             {pdfUrl && (
-              <p> לדו"ח המקורי ב
-                <a href={pdfUrl} className="link" target="_blank">אתר החברה</a>
+              <p> לדו"ח המקורי
+                <a href={pdfUrl} className="link" target="_blank"> {chosenReport.fullName}</a>
               </p>
             )}
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
@@ -154,8 +156,8 @@ const Reports = () => {
           </div>
         )}
         {!loadingPdf && !pdfFile && pdfUrl && (
-          <p> לא ניתן לטעון את הדו"ח, ניתן לצפות בו ישירות דרך
-            <a href={pdfUrl} className="link" target="_blank"> אתר החברה</a>
+          <p> לא ניתן לטעון את הדו"ח, ניתן לצפות בו ישירות ב
+            <a href={pdfUrl} className="link" target="_blank">{chosenReport.fullName}</a>
           </p>
         )}
         {!pdfFile && (

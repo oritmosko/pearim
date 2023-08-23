@@ -28,7 +28,7 @@
 .category-items {
   overflow: hidden;
   max-height: 0;
-  transition: max-height 0.3s ease-in-out;
+  transition: max-height 0.2s ease-in-out;
 }
 
 .category-items.expanded {
@@ -43,8 +43,12 @@
   background-color: #e0e0e0;
 }
 
-.more-pages {
+li {
   text-align: right;
+  margin-right: 40px;
+}
+
+.more-pages {
   margin-right: 60px;
 }
 
