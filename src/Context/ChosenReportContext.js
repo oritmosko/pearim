@@ -4,9 +4,11 @@ const ChosenReportContext = createContext();
 
 const ChosenReportProvider = ({ children }) => {
   const [chosenReport, setChosenReport] = useState('');
+  const [chosenReportPage, setChosenReportPage] = useState(0);
 
   return (
-    <ChosenReportContext.Provider value={{ chosenReport, setChosenReport }}>
+    <ChosenReportContext.Provider value={{ chosenReport, setChosenReport,
+                                           chosenReportPage, setChosenReportPage }}>
       {children}
     </ChosenReportContext.Provider>
   );

@@ -15,11 +15,30 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback }) => {
   };
 
   const filteredReports = reports.map(reportsCategory => {
-    const filteredItems = reportsCategory.reports.filter(report =>
-      report.fullName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // const filteredItems = reportsCategory.reports.filter(report =>
+    //   report.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    //   report.engName.includes(searchTerm)
+    // );
+    const searchWord = searchTerm.toLowerCase();
+    const filteredReports = [];
 
-    if (filteredItems.length === 0) {
+    reportsCategory.reports.forEach(report => {
+      let nameMatch = report.fullName.includes(searchWord) || report.engName.includes(searchWord);
+      let pageNamesMatches = 0;
+      report.morePages.forEach(page => {
+        page.display = false;
+        if (page.name.includes(searchWord)) {
+          pageNamesMatches += 1;
+          page.display = true;
+        }
+      });
+
+      if (nameMatch || pageNamesMatches > 0) {
+        filteredReports.push(report);
+      }
+    });
+
+    if (filteredReports.length === 0) {
       return null; // Skip rendering this category if no matching items
     }
 
@@ -30,7 +49,7 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback }) => {
 
     return {
       ...reportsCategory,
-      items: filteredItems,
+      items: filteredReports,
     };
   }).filter(reportsCategory => reportsCategory !== null);
 
@@ -45,9 +64,19 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback }) => {
           </h4>
           <ul className={`category-items ${expandedCategories.includes(reportsCategory.category) || searchTerm != ""  ? 'expanded' : ''}`}>
             {reportsCategory.reports.map((report, index) => (
-              <li key={index} onClick={() => onClickCallback(report)}>
-                {report.fullName}
-              </li>
+              <div key={`{report.fullName}_pages`}>
+                <li key={report.fullName}
+                    onClick={() => onClickCallback(report)}>
+                  {report.fullName}
+                </li>
+                {report.morePages.map((page) => (
+                  <li key={page.name}
+                      className={`more-pages ${page.display}`}
+                      onClick={() => onClickCallback(report, page.page)}>
+                    {page.name}
+                  </li>
+                ))}
+              </div>
             ))}
           </ul>
         </div>
@@ -56,7 +85,7 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback }) => {
   );
 };
 
-const CollapsibleListWithSearch = ({ reports, onClickCallback }) => {
+const CollapsibleCategorizedList = ({ reports, onClickCallback }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
@@ -77,4 +106,4 @@ const CollapsibleListWithSearch = ({ reports, onClickCallback }) => {
 
 };
 
-export default CollapsibleListWithSearch;
+export default CollapsibleCategorizedList;

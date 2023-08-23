@@ -43,6 +43,15 @@
   background-color: #e0e0e0;
 }
 
+.more-pages {
+  text-align: right;
+  margin-right: 60px;
+}
+
+.more-pages.false {
+  display: none;
+}
+
 .search-container {
   position: relative;
 }

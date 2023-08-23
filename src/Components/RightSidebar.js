@@ -18,16 +18,15 @@ const RightSidebar = () => {
   useEffect(() => {
     api.get('/api/fetchReportsJson')
       .then(response => {
-        // console.log("Fetched JSON:", json.data);
         setReportsList(response.data);
-        // setInputSearchString("ג");
       })
       .catch(error => console.error('Error loading JSON:', error));
   }, []);
 
-  const { setChosenReport } = useChosenReport();
-  const handleItemClick = (report) => {
-    setChosenReport(report); // Set the search term when an item is clicked
+  const { setChosenReport, setChosenReportPage } = useChosenReport();
+  const handleItemClick = (report, pageNum) => {
+    setChosenReport(report);
+    setChosenReportPage(pageNum);
   };
 
   return window.innerWidth < 768 ?
@@ -35,7 +34,7 @@ const RightSidebar = () => {
   (
     <div className="right-sidebar">
       <CollapsibleCategorizedList reports={reportsList}
-                                  onClickCallback={(report, index) => handleItemClick(report)}/>
+                                  onClickCallback={(report, pageNum = 0) => handleItemClick(report, pageNum)}/>
     </div>
   );
 };
