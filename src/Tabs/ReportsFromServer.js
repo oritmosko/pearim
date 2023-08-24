@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Reports.css';
 
 import axios from 'axios';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'; // Search Bar
+import CollapsibleCategorizedList from '../Components/CollapsibleCategorizedList';
 import { SERVER_PATH } from '../Config/ServerConfig';
 import { useChosenReport } from '../Context/ChosenReportContext';
 import wordcloud from '../assets/wordcloud2.png';
@@ -19,17 +19,7 @@ const api = axios.create({
 });
 
 const Reports = () => {
-  // Fetch companies list.
-  const [reportsList, setReportsList] = useState([]);
-  const [inputSearchString, setInputSearchString] = useState("");
-  useEffect(() => {
-    api.get('/api/fetchReportsJson')
-      .then(response => {
-        setReportsList(response.data);
-      })
-      .catch(error => console.error('Error loading JSON:', error));
-  }, []);
-
+  // Large screens configuration with Pdf viewer
   const { chosenReport, chosenReportPage } = useChosenReport();
   useEffect(() => {
     if (chosenReport) {
@@ -38,7 +28,7 @@ const Reports = () => {
   }, [chosenReport, chosenReportPage]);
 
   // Fetch single pdf report.
-  const [originUrl, setOriginUrl] = useState(null); // Pdf file URL state
+  // const [originUrl, setOriginUrl] = useState(null); // Pdf file URL state
   const [pdfFile, setPdfFile] = useState(null); // Pdf file onChange state
   const [pdfUrl, setPdfUrl] = useState(null); // Pdf file URL state
   const [reportPageNum, setReportPageNum] = useState(0);
@@ -61,7 +51,7 @@ const Reports = () => {
     }
     // Reprot url changed
     setPdfUrl(report.reportUrl);
-    setOriginUrl(report.originUrl);
+    // setOriginUrl(report.originUrl);
     setPdfFile(null);
     try {
       const response = await api.get('/api/fetchPdf', {
@@ -145,8 +135,29 @@ const Reports = () => {
   const layoutPluginInstances = [defaultLayoutPluginInstance]
   const defaultScale = SpecialZoomLevel.PageWidth;
 
-  // TODO(oritmosko): If smaller than 768, render the CollapsibleList
-  return (
+  // Small screen configuration, only with collapsible list of reports
+  // Fetch companies list.
+  const [reportsList, setReportsList] = useState([]);
+  useEffect(() => {
+    api.get('/api/fetchReportsJson')
+      .then(response => {
+        setReportsList(response.data);
+      })
+      .catch(error => console.error('Error loading JSON:', error));
+  }, []);
+  const handleItemClick = (report, pageNum) => {
+    window.open(report.reportUrl, "_blank");
+  };
+
+  return window.innerWidth < 768 ?
+  (
+    <div className="reports-list-container">
+      <CollapsibleCategorizedList reports={reportsList}
+                                  onClickCallback={(report, pageNum = 0) => handleItemClick(report, pageNum)}
+                                  renderMorePages={false}/>
+    </div>
+  ) :
+  (
     <div className="reports-content">
       <div className="selected-item">
         {pdfFile && (

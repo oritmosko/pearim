@@ -1,3 +1,7 @@
+.reports-list-container {
+  margin: 0px 20px 0px 20px;
+}
+
 .reports-content {
   display: flex;
   flex-direction: column;
@@ -5,36 +9,6 @@
   justify-content: center;
   /* height: 100%; */
 }
-
-/* .search-bar {
-  z-index: 999;
-  justify-content: center;
-  align-items: center;
-  width: 30%;
-  margin-top: 20px;
-}
-@media (max-width: 1600px) {
-  .search-bar {
-    width: 50%;
-    margin-right: 80px;
-  }
-}
-@media (max-width: 768px) {
-  .search-bar {
-    width: 90%;
-    margin-top: 10px;
-    margin-right: 0px;
-  }
-} */
-
-/* .react-autosuggest__suggestions-list {
-  max-height: 200px;
-  overflow-y: auto;
-}
-.react-search-autocomplete-dropdown-container div div:nth-child(2) {
-  max-height: 200px;
-  overflow-y: auto;
-} */
 
 .selected-item {
   background-color: #f7f7f7;
