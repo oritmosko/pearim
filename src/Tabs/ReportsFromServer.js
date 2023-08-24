@@ -45,25 +45,36 @@ const Reports = () => {
   const [loadingPdf, setLoadingPdf] = useState(false);
   const handleFetchReport = async (report, pageNum = 0) => {
     setLoadingPdf(true);
+    // Handle click on the same report url on a different page.
     if (report.reportUrl == pdfUrl) {
       if (pdfFile) {
+        const defaultPageNum = report.hasOwnProperty('page') ? report.page : 0;
+        setReportPageNum(pageNum > 0 ? pageNum : defaultPageNum);
+        // Refresh pdf to re-render.
         const tmpPdfFile = pdfFile;
         setPdfFile(null);
-        setReportPageNum(pageNum > 0 ? pageNum : report.page);
         await new Promise(resolve => setTimeout(resolve, 10));
         setPdfFile(tmpPdfFile);
       }
       setLoadingPdf(false);
       return;
     }
+    // Reprot url changed
+    setPdfUrl(report.reportUrl);
+    setOriginUrl(report.originUrl);
+    setPdfFile(null);
     try {
-      setPdfUrl(report.reportUrl);
-      setOriginUrl(report.originUrl);
-      setPdfFile(null);
       const response = await api.get('/api/fetchPdf', {
         params: { url: report.reportUrl },
         responseType: 'arraybuffer',
       });
+
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.toLowerCase().includes("pdf")) {
+        setPdfFile(null);
+        setLoadingPdf(false);
+        return;
+      }
 
       const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
       let reader = new FileReader();
