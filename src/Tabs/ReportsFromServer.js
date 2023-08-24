@@ -160,6 +160,11 @@ const Reports = () => {
   (
     <div className="reports-content">
       <div className="selected-item">
+        {loadingPdf && (
+          <div class="loader">
+            <img src={wordcloud}/>
+          </div>
+        )}
         {pdfFile && (
           <div className={`pdf-file-container ${reportPageNum}`}>
             {pdfUrl && (
@@ -182,8 +187,8 @@ const Reports = () => {
             <a href={pdfUrl} className="link" target="_blank">{chosenReport.fullName}</a>
           </p>
         )}
-        {!pdfFile && (
-          <img src={wordcloud} className="image-container" alt="Image"/>
+        {!loadingPdf && !pdfFile && (
+          <img src={wordcloud} className="image-container"/>
         )}
 
       </div>

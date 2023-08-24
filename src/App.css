@@ -7,10 +7,7 @@ body {
 }
 
 .header-container {
-  /* background-color: lightgrey; */
-  /* min-height: 100vh; */
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
 }
 
@@ -21,8 +18,15 @@ body {
 }
 @media (max-width: 768px) {
   .header-image-container {
-    display: none;
+    width: 50px;
+    position: absolute;
+    margin-right: 6px;
+    top: 26px;
+    right: 0;
   }
+}
+.header-image-container:hover {
+  cursor: pointer;
 }
 
 .header {
@@ -44,6 +48,7 @@ body {
 @media (max-width: 768px) {
   .title {
     font-size: 22px;
+    margin-right: 20px;
   }
 }
 

@@ -46,7 +46,9 @@ const App = () => {
       <div>
         <div>
           <div className="header-container">
-            <img src={wordcloud} className="header-image-container" alt="Image"/>
+            <img src={wordcloud}
+                 className="header-image-container"
+                 onClick={() => setSelectedTab('Reports')} />
             <header className="header">
               <h1 className="title">דו"ח שכר (לא) שווה לעובדת ולעובד</h1>
               <div className="title-line"></div>
