@@ -15,10 +15,6 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback, renderMorePages
   };
 
   const displayedReportsCategories = reports.map(reportsCategory => {
-    // const filteredItems = reportsCategory.reports.filter(report =>
-    //   report.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //   report.engName.includes(searchTerm)
-    // );
     const searchWord = searchTerm.toLowerCase();
     let filteredReports = [];
     if (searchWord.length == 0) {
