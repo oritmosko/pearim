@@ -32,9 +32,9 @@ const Reports = () => {
   const [pdfFile, setPdfFile] = useState(null); // Pdf file onChange state
   const [pdfUrl, setPdfUrl] = useState(null); // Pdf file URL state
   const [reportPageNum, setReportPageNum] = useState(0);
-  const [loadingPdf, setLoadingPdf] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleFetchReport = async (report, pageNum = 0) => {
-    setLoadingPdf(true);
+    setLoading(true);
     // Handle click on the same report url on a different page.
     if (report.reportUrl == pdfUrl) {
       if (pdfFile) {
@@ -46,7 +46,7 @@ const Reports = () => {
         await new Promise(resolve => setTimeout(resolve, 10));
         setPdfFile(tmpPdfFile);
       }
-      setLoadingPdf(false);
+      setLoading(false);
       return;
     }
     // Reprot url changed
@@ -62,7 +62,7 @@ const Reports = () => {
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.toLowerCase().includes("pdf")) {
         setPdfFile(null);
-        setLoadingPdf(false);
+        setLoading(false);
         return;
       }
 
@@ -72,11 +72,11 @@ const Reports = () => {
       reader.onloadend = (e) => {
         setPdfFile(e.target.result);
         setReportPageNum(pageNum > 0 ? pageNum : report.page);
-        setLoadingPdf(false);
+        setLoading(false);
       }
     } catch (error) {
       setPdfFile(null);
-      setLoadingPdf(false);
+      setLoading(false);
     }
   };
 
@@ -139,11 +139,14 @@ const Reports = () => {
   // Fetch companies list.
   const [reportsList, setReportsList] = useState([]);
   useEffect(() => {
-    api.get('/api/fetchReportsJson')
-      .then(response => {
-        setReportsList(response.data);
-      })
-      .catch(error => console.error('Error loading JSON:', error));
+    if (window.innerWidth < 768) {
+      setLoading(true);
+      console.log("here");
+      api.get('/api/fetchReportsJson')
+        .then(response => setReportsList(response.data))
+        .catch(error => console.error('Error loading JSON:', error))
+        .finally(() => setLoading(false));
+    }
   }, []);
   const handleItemClick = (report, pageNum) => {
     window.open(report.reportUrl, "_blank");
@@ -155,18 +158,23 @@ const Reports = () => {
       <CollapsibleCategorizedList reports={reportsList}
                                   onClickCallback={(report, pageNum = 0) => handleItemClick(report, pageNum)}
                                   renderMorePages={false}/>
+      {loading && (
+        <div className="loader">
+          <img src={wordcloud}/>
+        </div>
+      )}
     </div>
   ) :
   (
     <div className="reports-content">
       <div className="selected-item">
-        {loadingPdf && (
-          <div class="loader">
+        {loading && (
+          <div className="loader">
             <img src={wordcloud}/>
           </div>
         )}
         {pdfFile && (
-          <div className={`pdf-file-container ${reportPageNum}`}>
+          <div className="pdf-file-container">
             {pdfUrl && (
               <p> לדו"ח המקורי
                 <a href={pdfUrl} className="link" target="_blank"> {chosenReport.fullName}</a>
@@ -182,12 +190,12 @@ const Reports = () => {
             </Worker>
           </div>
         )}
-        {!loadingPdf && !pdfFile && pdfUrl && (
+        {!loading && !pdfFile && pdfUrl && (
           <p> לא ניתן לטעון את הדו"ח, ניתן לצפות בו ישירות ב
             <a href={pdfUrl} className="link" target="_blank">{chosenReport.fullName}</a>
           </p>
         )}
-        {!loadingPdf && !pdfFile && (
+        {!loading && !pdfFile && (
           <img src={wordcloud} className="image-container"/>
         )}
 
