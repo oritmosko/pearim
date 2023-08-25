@@ -46,19 +46,21 @@ const App = () => {
       <div>
         <div>
           <div className="header-container">
-            <img src={wordcloud}
-                 className="header-image-container"
-                 onClick={() => setSelectedTab('Reports')}
-                 alt="" />
+            <a href="#reports">
+              <img src={wordcloud}
+                   className="header-image-container"
+                   onClick={() => setSelectedTab('Reports')}
+                   alt="" />
+            </a>
             <header className="header">
               <h1 className="title">דו"ח שכר (לא) שווה לעובדת ולעובד</h1>
               <div className="title-line"></div>
               <nav className="tabs">
-                <a href="/#" className="tab" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
+                <a href="#reports" className="tab" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
                 <span className="divider">|</span>
-                <a href="/#" className="tab" onClick={() => setSelectedTab('Missing')}>חסרה חברה?</a>
+                <a href="#missing-report" className="tab" onClick={() => setSelectedTab('Missing')}>חסרה חברה?</a>
                 <span className="divider">|</span>
-                <a href="/#" className="tab" onClick={() => setSelectedTab('QNA')}>שאלות</a>
+                <a href="#qna" className="tab" onClick={() => setSelectedTab('QNA')}>שאלות</a>
               </nav>
             </header>
           </div>
