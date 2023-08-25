@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/hello-world-app-tabs/static/css/main.8add2bca.css",
-    "main.js": "/hello-world-app-tabs/static/js/main.2fc003fe.js",
+    "main.css": "/hello-world-app-tabs/static/css/main.8f18bd46.css",
+    "main.js": "/hello-world-app-tabs/static/js/main.488957df.js",
     "static/js/787.028b954c.chunk.js": "/hello-world-app-tabs/static/js/787.028b954c.chunk.js",
     "static/media/wordcloud2.png": "/hello-world-app-tabs/static/media/wordcloud2.f00a5bec9be7cd5e814d.png",
     "index.html": "/hello-world-app-tabs/index.html",
-    "main.8add2bca.css.map": "/hello-world-app-tabs/static/css/main.8add2bca.css.map",
-    "main.2fc003fe.js.map": "/hello-world-app-tabs/static/js/main.2fc003fe.js.map",
+    "main.8f18bd46.css.map": "/hello-world-app-tabs/static/css/main.8f18bd46.css.map",
+    "main.488957df.js.map": "/hello-world-app-tabs/static/js/main.488957df.js.map",
     "787.028b954c.chunk.js.map": "/hello-world-app-tabs/static/js/787.028b954c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8add2bca.css",
-    "static/js/main.2fc003fe.js"
+    "static/css/main.8f18bd46.css",
+    "static/js/main.488957df.js"
   ]
 }
