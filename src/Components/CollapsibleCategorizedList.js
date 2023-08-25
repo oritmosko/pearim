@@ -17,7 +17,7 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback, renderMorePages
   const displayedReportsCategories = reports.map(reportsCategory => {
     const searchWord = searchTerm.toLowerCase();
     let filteredReports = [];
-    if (searchWord.length == 0) {
+    if (searchWord.length === 0) {
       filteredReports = reportsCategory.reports;
     }
     else {
@@ -59,12 +59,12 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback, renderMorePages
     <div>
       {displayedReportsCategories.map((reportsCategory) => (
         <div key={reportsCategory.category}
-             className={`category ${expandedCategories.includes(reportsCategory.category) || searchTerm != ""  ? 'expanded' : ''}`}>
+             className={`category ${expandedCategories.includes(reportsCategory.category) || searchTerm !== ""  ? 'expanded' : ''}`}>
           <h4 onClick={() => toggleCategory(reportsCategory.category)}>
-            <i className={`arrow ${expandedCategories.includes(reportsCategory.category) || searchTerm != ""  ? 'down' : 'left'}`}></i>
+            <i className={`arrow ${expandedCategories.includes(reportsCategory.category) || searchTerm !== ""  ? 'down' : 'left'}`}></i>
             {reportsCategory.category}
           </h4>
-          <ul className={`category-items ${expandedCategories.includes(reportsCategory.category) || searchTerm != ""  ? 'expanded' : ''}`}>
+          <ul className={`category-items ${expandedCategories.includes(reportsCategory.category) || searchTerm !== ""  ? 'expanded' : ''}`}>
             {reportsCategory.displayedReports.map((report, index) => (
               <div key={`${report.fullName}_pages`}>
                 <li key={report.fullName}

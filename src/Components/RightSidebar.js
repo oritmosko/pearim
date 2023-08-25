@@ -5,7 +5,6 @@ import axios from 'axios';
 import CollapsibleCategorizedList from './CollapsibleCategorizedList';
 import { SERVER_PATH } from '../Config/ServerConfig';
 import { useChosenReport } from '../Context/ChosenReportContext';
-import wordcloud from '../assets/wordcloud2.png';
 
 // Connect to backend server's URL
 const api = axios.create({

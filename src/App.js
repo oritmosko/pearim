@@ -32,7 +32,7 @@ const App = () => {
 
   const [rightSidebarStyle, setRightSidebarStyle] = useState({}); // Default selected tab is Reports
   useEffect(() => {
-    if (selectedTab == 'Reports') {
+    if (selectedTab === 'Reports') {
       setRightSidebarStyle({});
     } else {
       setRightSidebarStyle({
@@ -48,16 +48,17 @@ const App = () => {
           <div className="header-container">
             <img src={wordcloud}
                  className="header-image-container"
-                 onClick={() => setSelectedTab('Reports')} />
+                 onClick={() => setSelectedTab('Reports')}
+                 alt="" />
             <header className="header">
               <h1 className="title">דו"ח שכר (לא) שווה לעובדת ולעובד</h1>
               <div className="title-line"></div>
               <nav className="tabs">
-                <a href="#" className="tab" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
+                <a href="/#" className="tab" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
                 <span className="divider">|</span>
-                <a href="#" className="tab" onClick={() => setSelectedTab('Missing')}>חסרה חברה?</a>
+                <a href="/#" className="tab" onClick={() => setSelectedTab('Missing')}>חסרה חברה?</a>
                 <span className="divider">|</span>
-                <a href="#" className="tab" onClick={() => setSelectedTab('QNA')}>שאלות</a>
+                <a href="/#" className="tab" onClick={() => setSelectedTab('QNA')}>שאלות</a>
               </nav>
             </header>
           </div>

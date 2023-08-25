@@ -20,12 +20,6 @@ const api = axios.create({
 
 const Reports = () => {
   // Large screens configuration with Pdf viewer
-  const { chosenReport, chosenReportPage } = useChosenReport();
-  useEffect(() => {
-    if (chosenReport) {
-      handleFetchReport(chosenReport, chosenReportPage);
-    }
-  }, [chosenReport, chosenReportPage]);
 
   // Fetch single pdf report.
   // const [originUrl, setOriginUrl] = useState(null); // Pdf file URL state
@@ -36,7 +30,7 @@ const Reports = () => {
   const handleFetchReport = async (report, pageNum = 0) => {
     setLoading(true);
     // Handle click on the same report url on a different page.
-    if (report.reportUrl == pdfUrl) {
+    if (report.reportUrl === pdfUrl) {
       if (pdfFile) {
         const defaultPageNum = report.hasOwnProperty('page') ? report.page : 0;
         setReportPageNum(pageNum > 0 ? pageNum : defaultPageNum);
@@ -79,6 +73,13 @@ const Reports = () => {
       setLoading(false);
     }
   };
+
+  const { chosenReport, chosenReportPage } = useChosenReport();
+  useEffect(() => {
+    if (chosenReport) {
+      handleFetchReport(chosenReport, chosenReportPage);
+    }
+  }, [chosenReport, chosenReportPage]);
 
   const renderToolbar = (Toolbar: (props: ToolbarProps) => ReactElement) => (
       <Toolbar>
@@ -157,10 +158,10 @@ const Reports = () => {
     <div className="reports-list-container">
       <CollapsibleCategorizedList reports={reportsList}
                                   onClickCallback={(report, pageNum = 0) => handleItemClick(report, pageNum)}
-                                  renderMorePages={false}/>
+                                  renderMorePages={false} />
       {loading && (
         <div className="loader">
-          <img src={wordcloud}/>
+          <img src={wordcloud} alt="" />
         </div>
       )}
     </div>
@@ -170,14 +171,14 @@ const Reports = () => {
       <div className="selected-item">
         {loading && (
           <div className="loader">
-            <img src={wordcloud}/>
+            <img src={wordcloud} alt="" />
           </div>
         )}
         {pdfFile && (
           <div className="pdf-file-container">
             {pdfUrl && (
               <p> לדו"ח המקורי
-                <a href={pdfUrl} className="link" target="_blank"> {chosenReport.fullName}</a>
+                <a href={pdfUrl} className="link" target="_blank" rel="noopener noreferrer"> {chosenReport.fullName}</a>
               </p>
             )}
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
@@ -192,11 +193,11 @@ const Reports = () => {
         )}
         {!loading && !pdfFile && pdfUrl && (
           <p> לא ניתן לטעון את הדו"ח, ניתן לצפות בו ישירות ב
-            <a href={pdfUrl} className="link" target="_blank">{chosenReport.fullName}</a>
+            <a href={pdfUrl} className="link" target="_blank" rel="noopener noreferrer">{chosenReport.fullName}</a>
           </p>
         )}
         {!loading && !pdfFile && (
-          <img src={wordcloud} className="image-container"/>
+          <img src={wordcloud} className="image-container" alt="" />
         )}
 
       </div>
