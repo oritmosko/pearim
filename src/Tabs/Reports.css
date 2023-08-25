@@ -58,13 +58,11 @@
 }
 
 .loader img {
-  width: min(40%, 600px);
-  height: auto;
-  margin: 20px auto 0 auto;
   animation: spin 4s linear infinite;
 }
 @media (max-width: 768px) {
   .loader img {
+    margin: 20px auto 0 auto;
     width: min(60%, 600px);
   }
 }

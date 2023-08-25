@@ -7,7 +7,7 @@ import Reports from './Tabs/ReportsFromServer';
 import Missing from './Tabs/MissingWithGoogleForms';
 import QNA from './Tabs/QNA';
 import About from './Tabs/About';
-import wordcloud from './assets/wordcloud2.png';
+import logo from './assets/logo.png';
 
 const App = () => {
   const [selectedTab, setSelectedTab] = useState('Reports'); // Default selected tab is Reports
@@ -47,7 +47,7 @@ const App = () => {
         <div>
           <div className="header-container">
             <a href="#reports">
-              <img src={wordcloud}
+              <img src={logo}
                    className="header-image-container"
                    onClick={() => setSelectedTab('Reports')}
                    alt="" />

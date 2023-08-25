@@ -5,7 +5,7 @@ import axios from 'axios';
 import CollapsibleCategorizedList from '../Components/CollapsibleCategorizedList';
 import { SERVER_PATH } from '../Config/ServerConfig';
 import { useChosenReport } from '../Context/ChosenReportContext';
-import wordcloud from '../assets/wordcloud2.png';
+import logo from '../assets/logo.png';
 // Import Pdf related
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import { SpecialZoomLevel, Viewer } from '@react-pdf-viewer/core';
@@ -18,36 +18,42 @@ const api = axios.create({
   baseURL: SERVER_PATH
 });
 
+// TODO(oritmosko): Change pdf to iframe?
+// <iframe
+//   src={`${reportBlobUrl}#page=${reportPageNum}&navpanes=0&view=FitH`}
+//   width="100%"
+//   height="100%">
+// </iframe>
+
 const Reports = () => {
   // Large screens configuration with Pdf viewer
 
   // Fetch single pdf report.
-  // const [originUrl, setOriginUrl] = useState(null); // Pdf file URL state
-  const [pdfFile, setPdfFile] = useState(null); // Pdf file onChange state
-  const [pdfUrl, setPdfUrl] = useState(null); // Pdf file URL state
-  const [reportPageNum, setReportPageNum] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [reportPdfFile, setReportPdfFile] = useState(null); // Pdf file onChange state
+  const [reportUrl, setReportUrl] = useState(null); // Pdf file URL state
+  const [reportPageNum, setReportPageNum] = useState(0);
+
   const handleFetchReport = async (report, pageNum = 0) => {
     setLoading(true);
+    const defaultPageNum = report.hasOwnProperty('page') ? report.page : 0;
+    setReportPageNum(pageNum > 0 ? pageNum : defaultPageNum);
+    setReportUrl(report.reportUrl);
     // Handle click on the same report url on a different page.
-    if (report.reportUrl === pdfUrl) {
-      if (pdfFile) {
-        const defaultPageNum = report.hasOwnProperty('page') ? report.page : 0;
-        setReportPageNum(pageNum > 0 ? pageNum : defaultPageNum);
+    if (report.reportUrl === reportUrl) {
+      if (reportPdfFile) {
         // Refresh pdf to re-render.
-        const tmpPdfFile = pdfFile;
-        setPdfFile(null);
+        const tmpPdfFile = reportPdfFile;
+        setReportPdfFile(null);
         await new Promise(resolve => setTimeout(resolve, 10));
-        setPdfFile(tmpPdfFile);
+        setReportPdfFile(tmpPdfFile);
       }
       setLoading(false);
       return;
     }
     // Reprot url changed
-    setPdfUrl(report.reportUrl);
-    // setOriginUrl(report.originUrl);
-    setPdfFile(null);
     try {
+      setReportPdfFile(null);
       const response = await api.get('/api/fetchPdf', {
         params: { url: report.reportUrl },
         responseType: 'arraybuffer',
@@ -55,7 +61,7 @@ const Reports = () => {
 
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.toLowerCase().includes("pdf")) {
-        setPdfFile(null);
+        setReportPdfFile(null);
         setLoading(false);
         return;
       }
@@ -64,12 +70,11 @@ const Reports = () => {
       let reader = new FileReader();
       reader.readAsDataURL(pdfBlob);
       reader.onloadend = (e) => {
-        setPdfFile(e.target.result);
-        setReportPageNum(pageNum > 0 ? pageNum : report.page);
+        setReportPdfFile(e.target.result);
         setLoading(false);
       }
     } catch (error) {
-      setPdfFile(null);
+      setReportPdfFile(null);
       setLoading(false);
     }
   };
@@ -137,12 +142,10 @@ const Reports = () => {
   const defaultScale = SpecialZoomLevel.PageWidth;
 
   // Small screen configuration, only with collapsible list of reports
-  // Fetch companies list.
   const [reportsList, setReportsList] = useState([]);
   useEffect(() => {
     if (window.innerWidth < 768) {
       setLoading(true);
-      console.log("here");
       api.get('/api/fetchReportsJson')
         .then(response => setReportsList(response.data))
         .catch(error => console.error('Error loading JSON:', error))
@@ -161,7 +164,7 @@ const Reports = () => {
                                   renderMorePages={false} />
       {loading && (
         <div className="loader">
-          <img src={wordcloud} alt="" />
+          <img src={logo} alt="" />
         </div>
       )}
     </div>
@@ -171,18 +174,18 @@ const Reports = () => {
       <div className="selected-item">
         {loading && (
           <div className="loader">
-            <img src={wordcloud} alt="" />
+            <img src={logo} className="image-container" alt="" />
           </div>
         )}
-        {pdfFile && (
+        {reportPdfFile && (
           <div className="pdf-file-container">
-            {pdfUrl && (
+            {reportUrl && (
               <p> לדו"ח המקורי
-                <a href={pdfUrl} className="link" target="_blank" rel="noopener noreferrer"> {chosenReport.fullName}</a>
+                <a href={reportUrl} className="link" target="_blank" rel="noopener noreferrer"> {chosenReport.fullName}</a>
               </p>
             )}
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-              <Viewer fileUrl={pdfFile}
+              <Viewer fileUrl={reportPdfFile}
                       plugins={layoutPluginInstances}
                       enableSmoothScroll={false}
                       defaultScale={defaultScale}
@@ -191,13 +194,13 @@ const Reports = () => {
             </Worker>
           </div>
         )}
-        {!loading && !pdfFile && pdfUrl && (
+        {!loading && !reportPdfFile && reportUrl && (
           <p> לא ניתן לטעון את הדו"ח, ניתן לצפות בו ישירות ב
-            <a href={pdfUrl} className="link" target="_blank" rel="noopener noreferrer">{chosenReport.fullName}</a>
+            <a href={reportUrl} className="link" target="_blank" rel="noopener noreferrer">{chosenReport.fullName}</a>
           </p>
         )}
-        {!loading && !pdfFile && (
-          <img src={wordcloud} className="image-container" alt="" />
+        {!loading && !reportPdfFile && (
+          <img src={logo} className="image-container" alt="" />
         )}
 
       </div>
