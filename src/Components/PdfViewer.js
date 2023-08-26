@@ -20,23 +20,23 @@ const PDFViewer = () => {
   const defaultScale = SpecialZoomLevel.PageWidth;
 
   return navigator && navigator.mimeTypes && navigator.mimeTypes["application/pdf"] ?
-  displayedReportUrlBlob && (
-    <iframe
-      src={`${displayedReportUrlBlob}#page=${displayedReportPageNum + 1}&navpanes=0&view=FitH`}
-      width="100%"
-      height="100%">
-    </iframe>
-  ) :
-  displayedReportPdfFile && (
-    <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-      <Viewer fileUrl={displayedReportPdfFile}
-              plugins={layoutPluginInstances}
-              enableSmoothScroll={false}
-              defaultScale={defaultScale}
-              initialPage={displayedReportPageNum}>
-      </Viewer>
-    </Worker>
-  );
+    displayedReportUrlBlob && (
+      <iframe
+        src={`${displayedReportUrlBlob}#page=${displayedReportPageNum + 1}&navpanes=0&view=FitH`}
+        width="100%"
+        height="100%">
+      </iframe>
+    ) :
+    displayedReportPdfFile && (
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+        <Viewer fileUrl={displayedReportPdfFile}
+                plugins={layoutPluginInstances}
+                enableSmoothScroll={false}
+                defaultScale={defaultScale}
+                initialPage={displayedReportPageNum}>
+        </Viewer>
+      </Worker>
+    );
 }
 
 export default PDFViewer;
