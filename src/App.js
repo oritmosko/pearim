@@ -3,6 +3,7 @@ import './App.css';
 
 import RightSidebar from './Components/RightSidebar';
 import { ChosenReportProvider } from './Context/ChosenReportContext';
+import { DisplayedReportPdfProvider } from './Context/DisplayedReportPdfContext';
 import Reports from './Tabs/ReportsFromServer';
 import Missing from './Tabs/MissingWithGoogleForms';
 import QNA from './Tabs/QNA';
@@ -43,6 +44,7 @@ const App = () => {
 
   return (
     <ChosenReportProvider>
+    <DisplayedReportPdfProvider>
       <div>
         <div>
           <div className="header-container">
@@ -72,6 +74,7 @@ const App = () => {
           </div>
         </div>
       </div>
+    </DisplayedReportPdfProvider>
     </ChosenReportProvider>
   );
 };

@@ -3,57 +3,50 @@ import './Reports.css';
 
 import axios from 'axios';
 import CollapsibleCategorizedList from '../Components/CollapsibleCategorizedList';
+import PDFViewer from '../Components/PdfViewer';
 import { SERVER_PATH } from '../Config/ServerConfig';
 import { useChosenReport } from '../Context/ChosenReportContext';
+import { useDisplayedReportPdf } from '../Context/DisplayedReportPdfContext';
 import logo from '../assets/logo.png';
-// Import Pdf related
-import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
-import { SpecialZoomLevel, Viewer } from '@react-pdf-viewer/core';
-import { Worker } from '@react-pdf-viewer/core';
-import '@react-pdf-viewer/core/lib/styles/index.css';
-import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 // Connect to backend server's URL
 const api = axios.create({
   baseURL: SERVER_PATH
 });
 
-// TODO(oritmosko): Change pdf to iframe?
-// <iframe
-//   src={`${reportBlobUrl}#page=${reportPageNum}&navpanes=0&view=FitH`}
-//   width="100%"
-//   height="100%">
-// </iframe>
-
 const Reports = () => {
   // Large screens configuration with Pdf viewer
 
   // Fetch single pdf report.
+  const { setDisplayedReportUrl, setDisplayedReportPdfFile, setDisplayedReportUrlBlob, setDisplayedReportPageNum,
+  displayedReportUrl, displayedReportPdfFile, displayedReportUrlBlob, displayedReportPageNum } = useDisplayedReportPdf();
+  // const { displayedReportUrl, displayedReportPdfFile, displayedReportUrlBlob, displayedReportPageNum } = useDisplayedReportPdf();
   const [loading, setLoading] = useState(false);
-  const [reportPdfFile, setReportPdfFile] = useState(null); // Pdf file onChange state
-  const [reportUrl, setReportUrl] = useState(null); // Pdf file URL state
-  const [reportPageNum, setReportPageNum] = useState(0);
 
   const handleFetchReport = async (report, pageNum = 0) => {
     setLoading(true);
     const defaultPageNum = report.hasOwnProperty('page') ? report.page : 0;
-    setReportPageNum(pageNum > 0 ? pageNum : defaultPageNum);
-    setReportUrl(report.reportUrl);
+    setDisplayedReportPageNum(pageNum > 0 ? pageNum : defaultPageNum);
+    setDisplayedReportUrl(report.reportUrl);
     // Handle click on the same report url on a different page.
-    if (report.reportUrl === reportUrl) {
-      if (reportPdfFile) {
+    if (report.reportUrl === displayedReportUrl) {
+      if (displayedReportPdfFile) {
         // Refresh pdf to re-render.
-        const tmpPdfFile = reportPdfFile;
-        setReportPdfFile(null);
-        await new Promise(resolve => setTimeout(resolve, 10));
-        setReportPdfFile(tmpPdfFile);
+        const tmpPdfFile = displayedReportPdfFile;
+        const tmpUrlBlob = displayedReportUrlBlob;
+        setDisplayedReportUrlBlob(null);
+        setDisplayedReportPdfFile(null);
+        await new Promise(resolve => setTimeout(resolve, 6));
+        setDisplayedReportUrlBlob(tmpUrlBlob);
+        setDisplayedReportPdfFile(tmpPdfFile);
       }
       setLoading(false);
       return;
     }
     // Reprot url changed
     try {
-      setReportPdfFile(null);
+      setDisplayedReportPdfFile(null);
+      setDisplayedReportUrlBlob(null);
       const response = await api.get('/api/fetchPdf', {
         params: { url: report.reportUrl },
         responseType: 'arraybuffer',
@@ -61,20 +54,21 @@ const Reports = () => {
 
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.toLowerCase().includes("pdf")) {
-        setReportPdfFile(null);
+        setDisplayedReportPdfFile(null);
         setLoading(false);
         return;
       }
 
       const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
+      setDisplayedReportUrlBlob(URL.createObjectURL(pdfBlob));
       let reader = new FileReader();
       reader.readAsDataURL(pdfBlob);
       reader.onloadend = (e) => {
-        setReportPdfFile(e.target.result);
+        setDisplayedReportPdfFile(e.target.result);
         setLoading(false);
       }
     } catch (error) {
-      setReportPdfFile(null);
+      setDisplayedReportPdfFile(null);
       setLoading(false);
     }
   };
@@ -85,61 +79,6 @@ const Reports = () => {
       handleFetchReport(chosenReport, chosenReportPage);
     }
   }, [chosenReport, chosenReportPage]);
-
-  const renderToolbar = (Toolbar: (props: ToolbarProps) => ReactElement) => (
-      <Toolbar>
-         {(slots: ToolbarSlot) => {
-           const {
-             CurrentPageInput,
-             Download,
-             GoToNextPage,
-             GoToPreviousPage,
-             NumberOfPages,
-             Zoom,
-             ZoomIn,
-             ZoomOut,
-           } = slots;
-
-           return (
-             <div style={{ alignItems: 'center',
-                           display: 'flex',
-                           width: '100%',
-                         }}>
-               <div style={{ padding: '0px 2px' }}>
-                   <GoToPreviousPage />
-               </div>
-               <div style={{ padding: '0px 2px', width: '4rem' }}>
-                   <CurrentPageInput />
-               </div>
-               <div style={{ padding: '0px 2px' }}>
-                   / <NumberOfPages />
-               </div>
-               <div style={{ padding: '0px 2px' }}>
-                   <GoToNextPage />
-               </div>
-               <div style={{ padding: '0px 2px', marginRight: 'auto' }}>
-                   <ZoomOut />
-               </div>
-               <div style={{ padding: '0px 2px' }}>
-                   <Zoom />
-               </div>
-               <div style={{ padding: '0px 2px', marginLeft: 'auto' }}>
-                   <ZoomIn />
-               </div>
-               <div style={{ padding: '0px 22px 0 2px' }}>
-                   <Download />
-               </div>
-             </div>
-           );
-         }}
-       </Toolbar>
-     );
-  const defaultLayoutPluginInstance = defaultLayoutPlugin({
-    sidebarTabs: (defaultTabs) => [],
-    renderToolbar
-  });
-  const layoutPluginInstances = [defaultLayoutPluginInstance]
-  const defaultScale = SpecialZoomLevel.PageWidth;
 
   // Small screen configuration, only with collapsible list of reports
   const [reportsList, setReportsList] = useState([]);
@@ -177,32 +116,24 @@ const Reports = () => {
             <img src={logo} className="image-container" alt="" />
           </div>
         )}
-        {reportPdfFile && (
+        {displayedReportUrlBlob && (
           <div className="pdf-file-container">
-            {reportUrl && (
+            {displayedReportUrl && (
               <p> לדו"ח המקורי
-                <a href={reportUrl} className="link" target="_blank" rel="noopener noreferrer"> {chosenReport.fullName}</a>
+                <a href={displayedReportUrl} className="link" target="_blank" rel="noopener noreferrer"> {chosenReport.fullName}</a>
               </p>
             )}
-            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-              <Viewer fileUrl={reportPdfFile}
-                      plugins={layoutPluginInstances}
-                      enableSmoothScroll={false}
-                      defaultScale={defaultScale}
-                      initialPage={reportPageNum}>
-              </Viewer>
-            </Worker>
+            <PDFViewer />
           </div>
         )}
-        {!loading && !reportPdfFile && reportUrl && (
+        {!loading && !displayedReportUrlBlob && displayedReportUrl && (
           <p> לא ניתן לטעון את הדו"ח, ניתן לצפות בו ישירות ב
-            <a href={reportUrl} className="link" target="_blank" rel="noopener noreferrer">{chosenReport.fullName}</a>
+            <a href={displayedReportUrl} className="link" target="_blank" rel="noopener noreferrer">{chosenReport.fullName}</a>
           </p>
         )}
-        {!loading && !reportPdfFile && (
+        {!loading && !displayedReportUrlBlob && (
           <img src={logo} className="image-container" alt="" />
         )}
-
       </div>
     </div>
   );
