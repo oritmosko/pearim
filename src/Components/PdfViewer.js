@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './PdfViewer.css';
 
 import { renderToolbar } from './PdfViewerDefaultLayoutPluginInstance'
@@ -10,7 +10,7 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 const PDFViewer = () => {
-  const { displayedReportUrl, displayedReportPdfFile, displayedReportUrlBlob, displayedReportPageNum } = useDisplayedReportPdf();
+  const { displayedReportPdfFile, displayedReportUrlBlob, displayedReportPageNum } = useDisplayedReportPdf();
 
   const defaultLayoutPluginInstance = defaultLayoutPlugin({
     sidebarTabs: (defaultTabs) => [],
@@ -23,6 +23,7 @@ const PDFViewer = () => {
     displayedReportUrlBlob && (
       <iframe
         src={`${displayedReportUrlBlob}#page=${displayedReportPageNum + 1}&navpanes=0&view=FitH`}
+        title="report-pdf"
         width="100%"
         height="100%">
       </iframe>

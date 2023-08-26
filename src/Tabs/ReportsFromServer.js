@@ -19,8 +19,7 @@ const Reports = () => {
 
   // Fetch single pdf report.
   const { setDisplayedReportUrl, setDisplayedReportPdfFile, setDisplayedReportUrlBlob, setDisplayedReportPageNum,
-  displayedReportUrl, displayedReportPdfFile, displayedReportUrlBlob, displayedReportPageNum } = useDisplayedReportPdf();
-  // const { displayedReportUrl, displayedReportPdfFile, displayedReportUrlBlob, displayedReportPageNum } = useDisplayedReportPdf();
+          displayedReportUrl, displayedReportPdfFile, displayedReportUrlBlob } = useDisplayedReportPdf();
   const [loading, setLoading] = useState(false);
 
   const handleFetchReport = async (report, pageNum = 0) => {
