@@ -43,7 +43,7 @@ body {
   width: 90%;
   margin: 0 auto 0 auto;
 }
-@media (max-width: 768px) {
+@media (max-width: 1600px) {
   .header {
     padding: 20px;
     width: 100%;
@@ -58,7 +58,7 @@ body {
 @media (max-width: 768px) {
   .title {
     font-size: 22px;
-    margin-right: 20px;
+    margin-right: 40px;
   }
 }
 

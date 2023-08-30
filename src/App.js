@@ -4,6 +4,7 @@ import './App.css';
 import RightSidebar from './Components/RightSidebar';
 import { ChosenReportProvider } from './Context/ChosenReportContext';
 import { DisplayedReportPdfProvider } from './Context/DisplayedReportPdfContext';
+import { ReportListProvider } from './Context/ReportListContext';
 import Reports from './Tabs/ReportsFromServer';
 import Missing from './Tabs/MissingWithGoogleForms';
 import QNA from './Tabs/QNA';
@@ -45,6 +46,7 @@ const App = () => {
   return (
     <ChosenReportProvider>
     <DisplayedReportPdfProvider>
+    <ReportListProvider>
       <div>
         <div>
           <div className="header-container">
@@ -55,7 +57,7 @@ const App = () => {
                    alt="" />
             </a>
             <header className="header">
-              <h1 className="title">דו"ח שכר (לא) שווה לעובדת ולעובד</h1>
+              <h1 className="title">דוח שכר (לא) שווה לעובדת ולעובד</h1>
               <div className="title-line"></div>
               <nav className="tabs">
                 <a href="#reports" className="tab" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
@@ -74,6 +76,7 @@ const App = () => {
           </div>
         </div>
       </div>
+    </ReportListProvider>
     </DisplayedReportPdfProvider>
     </ChosenReportProvider>
   );

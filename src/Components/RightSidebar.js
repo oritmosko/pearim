@@ -5,6 +5,7 @@ import axios from 'axios';
 import CollapsibleCategorizedList from './CollapsibleCategorizedList';
 import { SERVER_PATH } from '../Config/ServerConfig';
 import { useChosenReport } from '../Context/ChosenReportContext';
+import { useReportList } from '../Context/ReportListContext';
 
 // Connect to backend server's URL
 const api = axios.create({
@@ -13,11 +14,13 @@ const api = axios.create({
 
 const RightSidebar = () => {
   // Fetch companies list.
+  const { setReportListLoaded } = useReportList();
   const [reportsList, setReportsList] = useState([]);
   useEffect(() => {
     api.get('/api/fetchReportsJson')
       .then(response => {
         setReportsList(response.data);
+        setReportListLoaded(true);
       })
       .catch(error => console.error('Error loading JSON:', error));
   }, []);

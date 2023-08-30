@@ -7,6 +7,7 @@ import PDFViewer from '../Components/PdfViewer';
 import { SERVER_PATH } from '../Config/ServerConfig';
 import { useChosenReport } from '../Context/ChosenReportContext';
 import { useDisplayedReportPdf } from '../Context/DisplayedReportPdfContext';
+import { useReportList } from '../Context/ReportListContext';
 import logo from '../assets/logo.png';
 
 // Connect to backend server's URL
@@ -16,6 +17,7 @@ const api = axios.create({
 
 const Reports = () => {
   // Large screens configuration with Pdf viewer
+  const { reportListLoaded } = useReportList();
 
   // Fetch single pdf report.
   const { setDisplayedReportUrl, setDisplayedReportPdfFile, setDisplayedReportUrlBlob, setDisplayedReportPageNum,
@@ -94,6 +96,12 @@ const Reports = () => {
     window.open(report.reportUrl, "_blank");
   };
 
+  const runLogoAnimation = async (e) => {
+    e.target.classList.remove('start');
+    await new Promise(resolve => setTimeout(resolve, 6));
+    e.target.classList.add('start');
+  }
+
   return window.innerWidth < 768 ?
   (
     <div className="reports-list-container">
@@ -130,8 +138,8 @@ const Reports = () => {
             <a href={displayedReportUrl} className="link" target="_blank" rel="noopener noreferrer">{chosenReport.fullName}</a>
           </p>
         )}
-        {!loading && !displayedReportUrlBlob && (
-          <img src={logo} className="image-container" alt="" />
+        {reportListLoaded && !loading && !displayedReportUrlBlob && (
+          <img src={logo} className="image-container start" alt="" onClick={(e) => runLogoAnimation(e)} />
         )}
       </div>
     </div>
