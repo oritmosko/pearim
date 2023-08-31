@@ -29,6 +29,9 @@
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.2s ease-in-out;
+}
+
+.category-items.firstTime {
   animation: openDemo 1.5s ease-in-out;
 }
 

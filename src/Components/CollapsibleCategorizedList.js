@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import './CollapsibleCategorizedList.css';
 
 import { Search } from '@mui/icons-material'; // Import the search icon from Material-UI
+import { useFirstTime } from '../Context/FirstTimeContext';
 
-const CollapsibleList = ({ reports, searchTerm, onClickCallback, renderMorePages }) => {
+const CollapsibleList = ({ reports, firstTime, searchTerm, onClickCallback, renderMorePages }) => {
   const [expandedCategories, setExpandedCategories] = useState([]);
 
   const toggleCategory = (category) => {
@@ -64,7 +65,7 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback, renderMorePages
             <i className={`arrow ${expandedCategories.includes(reportsCategory.category) || searchTerm !== ""  ? 'down' : 'left'}`}></i>
             {reportsCategory.category}
           </h4>
-          <ul className={`category-items ${expandedCategories.includes(reportsCategory.category) || searchTerm !== ""  ? 'expanded' : ''}`}>
+          <ul className={`category-items ${firstTime.firstTime ? "firstTime" : ""} ${expandedCategories.includes(reportsCategory.category) || searchTerm !== ""  ? 'expanded' : ''}`}>
             {reportsCategory.displayedReports.map((report, index) => (
               <div key={`${report.fullName}_pages`}>
                 <li key={report.fullName}
@@ -87,7 +88,7 @@ const CollapsibleList = ({ reports, searchTerm, onClickCallback, renderMorePages
   );
 };
 
-const CollapsibleCategorizedList = ({ reports, onClickCallback, renderMorePages = true }) => {
+const CollapsibleCategorizedList = ({ reports, firstTime, onClickCallback, renderMorePages = true }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
@@ -103,6 +104,7 @@ const CollapsibleCategorizedList = ({ reports, onClickCallback, renderMorePages 
         />
       </div>
       <CollapsibleList reports={reports}
+                       firstTime={firstTime}
                        searchTerm={searchTerm}
                        onClickCallback={onClickCallback}
                        renderMorePages={renderMorePages} />

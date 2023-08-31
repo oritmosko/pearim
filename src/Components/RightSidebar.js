@@ -12,7 +12,7 @@ const api = axios.create({
   baseURL: SERVER_PATH
 });
 
-const RightSidebar = () => {
+const RightSidebar = (firstTime) => {
   // Fetch companies list.
   const { setReportListLoaded } = useReportList();
   const [reportsList, setReportsList] = useState([]);
@@ -36,6 +36,7 @@ const RightSidebar = () => {
   (
     <div className="right-sidebar">
       <CollapsibleCategorizedList reports={reportsList}
+                                  firstTime={firstTime}
                                   onClickCallback={(report, pageNum = 0) => handleItemClick(report, pageNum)}/>
     </div>
   );

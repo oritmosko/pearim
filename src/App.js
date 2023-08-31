@@ -5,6 +5,7 @@ import RightSidebar from './Components/RightSidebar';
 import { ChosenReportProvider } from './Context/ChosenReportContext';
 import { DisplayedReportPdfProvider } from './Context/DisplayedReportPdfContext';
 import { ReportListProvider } from './Context/ReportListContext';
+// import { FirstTimeProvider, useFirstTime } from './Context/FirstTimeContext';
 import Reports from './Tabs/ReportsFromServer';
 import Missing from './Tabs/MissingWithGoogleForms';
 import QNA from './Tabs/QNA';
@@ -13,6 +14,7 @@ import logo from './assets/logo.png';
 
 const App = () => {
   const [selectedTab, setSelectedTab] = useState('Reports'); // Default selected tab is Reports
+  const [firstTime, setFirstTime] = useState(true);
 
   let tabContent;
   switch (selectedTab) {
@@ -37,6 +39,7 @@ const App = () => {
     if (selectedTab === 'Reports') {
       setRightSidebarStyle({});
     } else {
+      setFirstTime(false);
       setRightSidebarStyle({
         display: 'none'
       });
@@ -70,7 +73,7 @@ const App = () => {
           </div>
           <div className="main-content">
             <div style={rightSidebarStyle}>
-              <RightSidebar />
+              <RightSidebar firstTime={firstTime} />
             </div>
             {tabContent}
           </div>
