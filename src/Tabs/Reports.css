@@ -64,15 +64,15 @@
   }
 
   25% {
-    transform: translate(50%, -10%) rotate(25deg);
+    transform: translate(calc(50% - 100px), -10%) rotate(25deg);
   }
 
   50% {
-    transform: translate(40%, -10%) rotate(15deg);
+    transform: translate(calc(40% - 100px), -10%) rotate(15deg);
   }
 
   75% {
-    transform: translate(50%, -10%) rotate(25deg);
+    transform: translate(calc(50% - 100px), -10%) rotate(25deg);
   }
 }
 .pdf-file-container {

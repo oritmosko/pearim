@@ -13,11 +13,15 @@ import About from './Tabs/About';
 import logo from './assets/logo.png';
 
 const App = () => {
-  const [selectedTab, setSelectedTab] = useState('Reports'); // Default selected tab is Reports
-  const [firstTime, setFirstTime] = useState(true);
+  const [selectedTab, setSelectedTab] = useState('About'); // Default selected tab is About
+  const [firstTime, setFirstTime] = useState(false);
+  const [firstTimeHappened, setFirstTimeHappened] = useState(false);
 
   let tabContent;
   switch (selectedTab) {
+    case 'About':
+      tabContent = <About />;
+      break;
     case 'Reports':
       tabContent = <Reports />;
       break;
@@ -27,24 +31,26 @@ const App = () => {
     case 'QNA':
       tabContent = <QNA />;
       break;
-    case 'About':
-      tabContent = <About />;
-      break;
     default:
-      tabContent = <Reports />;
+      tabContent = <About />;
   }
 
   const [rightSidebarStyle, setRightSidebarStyle] = useState({}); // Default selected tab is Reports
   useEffect(() => {
     if (selectedTab === 'Reports') {
+      if (!firstTimeHappened) {
+        setFirstTime(true);
+        setFirstTimeHappened(true);
+      } else {
+        setFirstTime(false);
+      }
       setRightSidebarStyle({});
     } else {
-      setFirstTime(false);
       setRightSidebarStyle({
         display: 'none'
       });
     }
-  }, [selectedTab]);
+  }, [selectedTab, firstTimeHappened]);
 
   return (
     <ChosenReportProvider>
@@ -63,6 +69,8 @@ const App = () => {
               <h1 className="title">דוח שכר (לא) שווה לעובדת ולעובד</h1>
               <div className="title-line"></div>
               <nav className="tabs">
+                <a href="#about" className="tab" onClick={() => setSelectedTab('About')}>אודות</a>
+                <span className="divider">|</span>
                 <a href="#reports" className="tab" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
                 <span className="divider">|</span>
                 <a href="#missing-report" className="tab" onClick={() => setSelectedTab('Missing')}>חסרה חברה?</a>

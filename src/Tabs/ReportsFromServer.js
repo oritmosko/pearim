@@ -86,10 +86,12 @@ const Reports = () => {
   useEffect(() => {
     if (window.innerWidth < 768) {
       setLoading(true);
-      api.get('/api/fetchReportsJson')
-        .then(response => setReportsList(response.data))
-        .catch(error => console.error('Error loading JSON:', error))
-        .finally(() => setLoading(false));
+      new Promise(resolve => setTimeout(resolve, 23))
+        .then(() =>
+          api.get('/api/fetchReportsJson')
+            .then(response => setReportsList(response.data))
+            .catch(error => console.error('Error loading JSON:', error))
+            .finally(() => setLoading(false)));
     }
   }, []);
   const handleItemClick = (report, pageNum) => {

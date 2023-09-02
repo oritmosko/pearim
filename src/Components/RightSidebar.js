@@ -17,12 +17,14 @@ const RightSidebar = (firstTime) => {
   const { setReportListLoaded } = useReportList();
   const [reportsList, setReportsList] = useState([]);
   useEffect(() => {
-    api.get('/api/fetchReportsJson')
-      .then(response => {
-        setReportsList(response.data);
-        setReportListLoaded(true);
-      })
-      .catch(error => console.error('Error loading JSON:', error));
+    new Promise(resolve => setTimeout(resolve, 45))
+      .then(() =>
+        api.get('/api/fetchReportsJson')
+          .then(response => {
+            setReportsList(response.data);
+            setReportListLoaded(true);
+          })
+          .catch(error => console.error('Error loading JSON:', error)));
   }, []);
 
   const { setChosenReport, setChosenReportPage } = useChosenReport();

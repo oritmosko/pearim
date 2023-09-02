@@ -1,0 +1,11 @@
+.about-content {
+  padding-top: 20px;
+}
+
+.report-caption {
+  font-size: 0;
+}
+
+.about-content .MuiSkeleton-root {
+  margin: 0 auto;
+}

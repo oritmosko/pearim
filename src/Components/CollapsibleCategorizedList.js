@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './CollapsibleCategorizedList.css';
 
 import { Search } from '@mui/icons-material'; // Import the search icon from Material-UI
-import { useFirstTime } from '../Context/FirstTimeContext';
 
 const CollapsibleList = ({ reports, firstTime, searchTerm, onClickCallback, renderMorePages }) => {
   const [expandedCategories, setExpandedCategories] = useState([]);
@@ -88,7 +87,7 @@ const CollapsibleList = ({ reports, firstTime, searchTerm, onClickCallback, rend
   );
 };
 
-const CollapsibleCategorizedList = ({ reports, firstTime, onClickCallback, renderMorePages = true }) => {
+const CollapsibleCategorizedList = ({ reports, firstTime = false, onClickCallback, renderMorePages = true }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (

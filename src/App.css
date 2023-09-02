@@ -45,7 +45,7 @@ body {
 }
 @media (max-width: 1600px) {
   .header {
-    padding: 20px;
+    padding: 20px 0 20px 20px;
     width: 100%;
   }
 }
@@ -94,7 +94,7 @@ body {
 }
 
 .divider {
-  margin: 0 10px;
+  margin: 0 4px;
   color: #ccc;
 }
 
