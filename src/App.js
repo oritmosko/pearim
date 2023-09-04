@@ -75,33 +75,33 @@ const App = () => {
                 דוח שכר (לא) שווה לעובדת ולעובד
               </h1>
               <div className="title-line"></div>
-              <nav className="tabs">
-                <a href="#about"
-                   className="tab about active"
-                   onClick={() => switchTabs("About")}>
-                  מה הבעיה בעצם?
-                </a>
-                <span className="divider">|</span>
-                <a href="#reports"
-                   className="tab reports"
-                   onClick={() => switchTabs("Reports")}>
-                  דוח"ות
-                </a>
-                <span className="divider">|</span>
-                <a href="#missing-report"
-                   className="tab missing"
-                   onClick={() => switchTabs("Missing")}>
-                  חסרה חברה?
-                </a>
-                <span className="divider">|</span>
-                <a href="#qna"
-                   className="tab qna"
-                   onClick={() => switchTabs("QNA")}>
-                  על הדוח
-                </a>
-              </nav>
             </header>
           </div>
+          <nav className="tabs">
+            <a href="#about"
+               className="tab about active"
+               onClick={() => switchTabs("About")}>
+              מה הבעיה בעצם?
+            </a>
+            <span className="divider">|</span>
+            <a href="#reports"
+               className="tab reports"
+               onClick={() => switchTabs("Reports")}>
+              דוח"ות
+            </a>
+            <span className="divider">|</span>
+            <a href="#missing-report"
+               className="tab missing"
+               onClick={() => switchTabs("Missing")}>
+              חסרה חברה?
+            </a>
+            <span className="divider">|</span>
+            <a href="#qna"
+               className="tab qna"
+               onClick={() => switchTabs("QNA")}>
+              על הדוח
+            </a>
+          </nav>
           <div className="main-content">
             <div style={rightSidebarStyle}>
               <RightSidebar firstTime={firstTime} />

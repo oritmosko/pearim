@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
@@ -24,10 +25,11 @@ const GraphCard = (props) => {
           onClick={handleCardClick} >
       <CardActionArea sx={{ minWidth: "100%" }}>
         {cardTitle && (
-          <CardContent>
-            <Typography variant="h7" color="text.secondary" sx={{ fontWeight: 'bold', minWidth: "100%" }} >
+          <CardContent sx={{ display: "flex" }}>
+            <Typography variant="h7" color="text.secondary" sx={{ fontWeight: 'bold', flexGrow: 1, marginLeft: "4px" }} >
               {cardTitle}
             </Typography>
+            <OpenInNewIcon color="action" fontSize="small"/>
             </CardContent>
         )}
       </CardActionArea>

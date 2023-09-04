@@ -12,7 +12,7 @@ body {
   margin-bottom: 5px;
   margin-top: 10px;
 }
-@media (max-width: 622px) {
+@media (max-width: 688px) {
   .header-container {
     margin-right: 60px;
   }
@@ -23,9 +23,9 @@ body {
   margin-left: 20px;
   width: 100px;
 }
-@media (max-width: 622px) {
+@media (max-width: 688px) {
   .header-image-container {
-    width: 60px;
+    width: 50px;
     position: absolute;
     margin-right: 6px;
     top: 26px;
@@ -45,7 +45,7 @@ body {
 }
 @media (max-width: 1200px) {
   .header {
-    padding-left: 15px;
+    padding: 0 0 0 15px;
     width: 100%;
   }
 }
@@ -55,10 +55,9 @@ body {
   margin-bottom: 10px;
   font-family: system-ui;
 }
-@media (max-width: 868px) {
+@media (max-width: 688px) {
   .title {
     font-size: 22px;
-    /* margin-right: 40px; */
   }
 }
 
@@ -74,11 +73,13 @@ body {
   display: block;
   width: fit-content;
   text-wrap: balance;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  margin-top: -10px;
 }
 @media (max-width: 485px) {
   .tabs {
-    font-size: small;
+    font-size: 14px;
+    text-wrap: wrap;
   }
 }
 
@@ -90,9 +91,15 @@ body {
   font-family: system-ui;
 }
 
-@media (max-width: 868px) {
+@media (max-width: 688px) {
   .tab {
     padding: 5px 6px;
+  }
+}
+@media (max-width: 359px) {
+  .tab {
+    display: inline-flex;
+    width: 20%;
   }
 }
 
