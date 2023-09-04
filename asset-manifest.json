@@ -1,13 +1,19 @@
 {
   "files": {
-    "main.css": "/hello-world-app-frontend/static/css/main.862da95d.css",
-    "main.js": "/hello-world-app-frontend/static/js/main.d1cb742e.js",
+    "main.css": "/hello-world-app-frontend/static/css/main.9026ebe5.css",
+    "main.js": "/hello-world-app-frontend/static/js/main.cfc277e8.js",
     "static/js/945.bd6504f3.chunk.js": "/hello-world-app-frontend/static/js/945.bd6504f3.chunk.js",
+    "static/media/gender-pay-gap-long.png": "/hello-world-app-frontend/static/media/gender-pay-gap-long.5f986e16bc952f3a2547.png",
     "static/media/logo.png": "/hello-world-app-frontend/static/media/logo.f00a5bec9be7cd5e814d.png",
+    "static/media/women_in_management_full_size.png": "/hello-world-app-frontend/static/media/women_in_management_full_size.8b4f4f6a6bb82db22cdd.png",
+    "static/media/women-in-politics.png": "/hello-world-app-frontend/static/media/women-in-politics.236321236e4fbcf63969.png",
+    "static/media/gender-pay-gap.png": "/hello-world-app-frontend/static/media/gender-pay-gap.da6f791989008918c48b.png",
+    "static/media/israel.png": "/hello-world-app-frontend/static/media/israel.05c683866037520d0da8.png",
+    "static/media/women_in_management.png": "/hello-world-app-frontend/static/media/women_in_management.099da3f6f693568eb952.png",
     "index.html": "/hello-world-app-frontend/index.html"
   },
   "entrypoints": [
-    "static/css/main.862da95d.css",
-    "static/js/main.d1cb742e.js"
+    "static/css/main.9026ebe5.css",
+    "static/js/main.cfc277e8.js"
   ]
 }

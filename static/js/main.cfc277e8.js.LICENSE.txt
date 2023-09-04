@@ -77,3 +77,12 @@
  * @license https://react-pdf-viewer.dev/license
  * @copyright 2019-2023 Nguyen Huu Phuoc <me@phuoc.ng>
  */
+
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
