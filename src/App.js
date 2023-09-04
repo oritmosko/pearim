@@ -50,7 +50,7 @@ const App = () => {
         display: 'none'
       });
     }
-  }, [selectedTab, firstTimeHappened]);
+  }, [selectedTab]);
 
   return (
     <ChosenReportProvider>
@@ -69,13 +69,13 @@ const App = () => {
               <h1 className="title">דוח שכר (לא) שווה לעובדת ולעובד</h1>
               <div className="title-line"></div>
               <nav className="tabs">
-                <a href="#about" className="tab" onClick={() => setSelectedTab('About')}>אודות</a>
+                <a href="#about" className="tab about" onClick={() => setSelectedTab('About')}>רקע</a>
                 <span className="divider">|</span>
-                <a href="#reports" className="tab" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
+                <a href="#reports" className="tab reports" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
                 <span className="divider">|</span>
-                <a href="#missing-report" className="tab" onClick={() => setSelectedTab('Missing')}>חסרה חברה?</a>
+                <a href="#missing-report" className="tab missing" onClick={() => setSelectedTab('Missing')}>חסרה חברה?</a>
                 <span className="divider">|</span>
-                <a href="#qna" className="tab" onClick={() => setSelectedTab('QNA')}>שאלות</a>
+                <a href="#qna" className="tab qna" onClick={() => setSelectedTab('QNA')}>שאלות</a>
               </nav>
             </header>
           </div>

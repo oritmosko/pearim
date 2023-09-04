@@ -45,7 +45,7 @@
 
 .image-container {
   width: min(40%, 600px);
-  margin: 20px auto 0 auto;
+  margin: 40px auto 0 auto;
 }
 @media (max-width: 1600px) {
   .image-container {
