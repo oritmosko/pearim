@@ -21,7 +21,9 @@ const GraphCard = (props) => {
 
   const card = window.innerWidth < 768 ?
   (
-    <Card sx={{ minWidth: "90%", margin: "0 auto" }}
+    <Card sx={{ minWidth: "90%",
+                margin: "0 auto",
+                borderRadius: "8px" }}
           onClick={handleCardClick} >
       <CardActionArea sx={{ minWidth: "100%" }}>
         {cardTitle && (
@@ -39,7 +41,7 @@ const GraphCard = (props) => {
   (
     <Card sx={{ maxWidth: 345,
                 margin: "0 auto",
-                borderRadius: "8px;",
+                borderRadius: "8px",
                 boxShadow: "0px 2px 8px 6px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);" }}
           onClick={handleCardClick} >
       <CardActionArea>
@@ -50,10 +52,11 @@ const GraphCard = (props) => {
           alt=""
         />
         {cardTitle && (
-          <CardContent>
-            <Typography variant="h7" color="text.secondary" sx={{ fontWeight: 'bold' }} >
+          <CardContent sx={{ display: "flex" }}>
+            <Typography variant="h7" color="text.secondary" sx={{ fontWeight: 'bold', flexGrow: 1, marginLeft: "4px" }} >
               {cardTitle}
             </Typography>
+            <OpenInNewIcon color="action" fontSize="small"/>
             </CardContent>
         )}
       </CardActionArea>
