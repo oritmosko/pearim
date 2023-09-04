@@ -8,8 +8,7 @@ const Missing = () => {
         src="https://docs.google.com/forms/d/1Uo0TdrhR-HAqJgzIZbeqeMGV-QODjT7Q34b2HpNxFNU/viewform?embedded=true"
         title="missingReport"
         className="google-form"
-        frameBorder="0"
-      >
+        frameBorder="0">
         Loading...
       </iframe>
     </div>

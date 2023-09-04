@@ -16,17 +16,19 @@ const api = axios.create({
 });
 
 const Reports = () => {
-  // Large screens configuration with Pdf viewer
+  // Large screens configuration with Pdf viewer.
   const { reportListLoaded } = useReportList();
 
   // Fetch single pdf report.
-  const { setDisplayedReportUrl, setDisplayedReportPdfFile, setDisplayedReportUrlBlob, setDisplayedReportPageNum,
-          displayedReportUrl, displayedReportPdfFile, displayedReportUrlBlob } = useDisplayedReportPdf();
+  const { setDisplayedReportUrl, setDisplayedReportPdfFile,
+          setDisplayedReportUrlBlob, setDisplayedReportPageNum,
+          displayedReportUrl, displayedReportPdfFile,
+          displayedReportUrlBlob } = useDisplayedReportPdf();
   const [loading, setLoading] = useState(false);
 
   const handleFetchReport = async (report, pageNum = 0) => {
     setLoading(true);
-    const defaultPageNum = report.hasOwnProperty('page') ? report.page : 0;
+    const defaultPageNum = report.hasOwnProperty("page") ? report.page : 0;
     setDisplayedReportPageNum(pageNum > 0 ? pageNum : defaultPageNum);
     setDisplayedReportUrl(report.reportUrl);
     // Handle click on the same report url on a different page.
@@ -44,13 +46,13 @@ const Reports = () => {
       setLoading(false);
       return;
     }
-    // Reprot url changed
+    // Reprot url changed.
     try {
       setDisplayedReportPdfFile(null);
       setDisplayedReportUrlBlob(null);
-      const response = await api.get('/api/fetchPdf', {
+      const response = await api.get("/api/fetchPdf", {
         params: { url: report.reportUrl },
-        responseType: 'arraybuffer',
+        responseType: "arraybuffer",
       });
 
       const contentType = response.headers.get("content-type");
@@ -60,7 +62,7 @@ const Reports = () => {
         return;
       }
 
-      const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
+      const pdfBlob = new Blob([response.data], { type: "application/pdf" });
       setDisplayedReportUrlBlob(URL.createObjectURL(pdfBlob));
       let reader = new FileReader();
       reader.readAsDataURL(pdfBlob);
@@ -81,16 +83,16 @@ const Reports = () => {
     }
   }, [chosenReport, chosenReportPage]);
 
-  // Small screen configuration, only with collapsible list of reports
+  // Small screen configuration, only with collapsible list of reports.
   const [reportsList, setReportsList] = useState([]);
   useEffect(() => {
     if (window.innerWidth < 768) {
       setLoading(true);
       new Promise(resolve => setTimeout(resolve, 23))
         .then(() =>
-          api.get('/api/fetchReportsJson')
+          api.get("/api/fetchReportsJson")
             .then(response => setReportsList(response.data))
-            .catch(error => console.error('Error loading JSON:', error))
+            .catch(error => console.error("Error loading JSON:", error))
             .finally(() => setLoading(false)));
     }
   }, []);
@@ -99,9 +101,9 @@ const Reports = () => {
   };
 
   const runLogoAnimation = async (e) => {
-    e.target.classList.remove('start');
+    e.target.classList.remove("start");
     await new Promise(resolve => setTimeout(resolve, 6));
-    e.target.classList.add('start');
+    e.target.classList.add("start");
   }
 
   return window.innerWidth < 768 ?
@@ -109,7 +111,7 @@ const Reports = () => {
     <div className="reports-list-container">
       <CollapsibleCategorizedList reports={reportsList}
                                   onClickCallback={(report, pageNum = 0) => handleItemClick(report, pageNum)}
-                                  renderMorePages={false} />
+                                  renderMorePages={false}/>
       {loading && (
         <div className="loader">
           <img src={logo} alt="" />
@@ -122,14 +124,19 @@ const Reports = () => {
       <div className="selected-item">
         {loading && (
           <div className="loader">
-            <img src={logo} className="image-container" alt="" />
+            <img src={logo} alt=""
+                 className="image-container" />
           </div>
         )}
         {displayedReportUrlBlob && (
           <div className="pdf-file-container">
             {displayedReportUrl && (
               <p> לדו"ח המקורי
-                <a href={displayedReportUrl} className="link" target="_blank" rel="noopener noreferrer"> {chosenReport.fullName}</a>
+                <a href={displayedReportUrl}
+                   target="_blank" rel="noopener noreferrer"
+                   className="link">
+                  {chosenReport.fullName}
+                </a>
               </p>
             )}
             <PDFViewer />
@@ -137,11 +144,17 @@ const Reports = () => {
         )}
         {!loading && !displayedReportUrlBlob && displayedReportUrl && (
           <p> לא ניתן לטעון את הדו"ח, ניתן לצפות בו ישירות ב
-            <a href={displayedReportUrl} className="link" target="_blank" rel="noopener noreferrer">{chosenReport.fullName}</a>
+            <a href={displayedReportUrl}
+               target="_blank" rel="noopener noreferrer"
+               className="link">
+              {chosenReport.fullName}
+            </a>
           </p>
         )}
         {reportListLoaded && !loading && !displayedReportUrlBlob && (
-          <img src={logo} className="image-container start" alt="" onClick={(e) => runLogoAnimation(e)} />
+          <img src={logo} alt=""
+               className="image-container start"
+               onClick={(e) => runLogoAnimation(e)} />
         )}
       </div>
     </div>

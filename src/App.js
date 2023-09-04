@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-import RightSidebar from './Components/RightSidebar';
 import { ChosenReportProvider } from './Context/ChosenReportContext';
 import { DisplayedReportPdfProvider } from './Context/DisplayedReportPdfContext';
 import { ReportListProvider } from './Context/ReportListContext';
-// import { FirstTimeProvider, useFirstTime } from './Context/FirstTimeContext';
-import Reports from './Tabs/ReportsFromServer';
+import About from './Tabs/About';
 import Missing from './Tabs/MissingWithGoogleForms';
 import QNA from './Tabs/QNA';
-import About from './Tabs/About';
+import RightSidebar from './Components/RightSidebar';
+import Reports from './Tabs/ReportsFromServer';
 import logo from './assets/logo.png';
 
 const App = () => {
-  const [selectedTab, setSelectedTab] = useState('About'); // Default selected tab is About
+  const [selectedTab, setSelectedTab] = useState("About"); // Default selected tab is About
   const [firstTime, setFirstTime] = useState(false);
   const [firstTimeHappened, setFirstTimeHappened] = useState(false);
 
   let tabContent;
   switch (selectedTab) {
-    case 'About':
+    case "About":
       tabContent = <About />;
       break;
-    case 'Reports':
+    case "Reports":
       tabContent = <Reports />;
       break;
-    case 'Missing':
+    case "Missing":
       tabContent = <Missing />;
       break;
-    case 'QNA':
+    case "QNA":
       tabContent = <QNA />;
       break;
     default:
@@ -37,7 +36,7 @@ const App = () => {
 
   const [rightSidebarStyle, setRightSidebarStyle] = useState({}); // Default selected tab is Reports
   useEffect(() => {
-    if (selectedTab === 'Reports') {
+    if (selectedTab === "Reports") {
       if (!firstTimeHappened) {
         setFirstTime(true);
         setFirstTimeHappened(true);
@@ -47,10 +46,16 @@ const App = () => {
       setRightSidebarStyle({});
     } else {
       setRightSidebarStyle({
-        display: 'none'
+        display: "none"
       });
     }
   }, [selectedTab]);
+
+  const switchTabs = (tabName) => {
+    document.getElementsByClassName(selectedTab.toLocaleLowerCase())[0].classList.toggle("active");
+    setSelectedTab(tabName);
+    document.getElementsByClassName(tabName.toLocaleLowerCase())[0].classList.toggle("active");
+  }
 
   return (
     <ChosenReportProvider>
@@ -62,20 +67,38 @@ const App = () => {
             <a href="#reports">
               <img src={logo}
                    className="header-image-container"
-                   onClick={() => setSelectedTab('Reports')}
+                   onClick={() => {document.getElementsByClassName("about")[0].click()}}
                    alt="" />
             </a>
             <header className="header">
-              <h1 className="title">דוח שכר (לא) שווה לעובדת ולעובד</h1>
+              <h1 className="title">
+                דוח שכר (לא) שווה לעובדת ולעובד
+              </h1>
               <div className="title-line"></div>
               <nav className="tabs">
-                <a href="#about" className="tab about" onClick={() => setSelectedTab('About')}>רקע</a>
+                <a href="#about"
+                   className="tab about active"
+                   onClick={() => switchTabs("About")}>
+                  מה הבעיה בעצם?
+                </a>
                 <span className="divider">|</span>
-                <a href="#reports" className="tab reports" onClick={() => setSelectedTab('Reports')}>דוח"ות</a>
+                <a href="#reports"
+                   className="tab reports"
+                   onClick={() => switchTabs("Reports")}>
+                  דוח"ות
+                </a>
                 <span className="divider">|</span>
-                <a href="#missing-report" className="tab missing" onClick={() => setSelectedTab('Missing')}>חסרה חברה?</a>
+                <a href="#missing-report"
+                   className="tab missing"
+                   onClick={() => switchTabs("Missing")}>
+                  חסרה חברה?
+                </a>
                 <span className="divider">|</span>
-                <a href="#qna" className="tab qna" onClick={() => setSelectedTab('QNA')}>שאלות</a>
+                <a href="#qna"
+                   className="tab qna"
+                   onClick={() => switchTabs("QNA")}>
+                  על הדוח
+                </a>
               </nav>
             </header>
           </div>
