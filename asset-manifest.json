@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/hello-world-app-frontend/static/css/main.ec549a93.css",
-    "main.js": "/hello-world-app-frontend/static/js/main.cfc277e8.js",
+    "main.css": "/hello-world-app-frontend/static/css/main.f7a475b3.css",
+    "main.js": "/hello-world-app-frontend/static/js/main.bbcf1d11.js",
     "static/js/945.bd6504f3.chunk.js": "/hello-world-app-frontend/static/js/945.bd6504f3.chunk.js",
     "static/media/gender-pay-gap-long.png": "/hello-world-app-frontend/static/media/gender-pay-gap-long.5f986e16bc952f3a2547.png",
     "static/media/logo.png": "/hello-world-app-frontend/static/media/logo.f00a5bec9be7cd5e814d.png",
@@ -13,7 +13,7 @@
     "index.html": "/hello-world-app-frontend/index.html"
   },
   "entrypoints": [
-    "static/css/main.ec549a93.css",
-    "static/js/main.cfc277e8.js"
+    "static/css/main.f7a475b3.css",
+    "static/js/main.bbcf1d11.js"
   ]
 }
