@@ -10,12 +10,10 @@ import genderPayGapLong from '../assets/gender-pay-gap-long.png';
 import womenInPolitics from '../assets/women-in-politics.png';
 import womenInManagement from '../assets/women_in_management.png';
 import womenInManagementFullSize from '../assets/women_in_management_full_size.png';
-import israel from '../assets/israel.png';
+// import israel from '../assets/israel1.png';
 import GraphCard from '../Components/GraphCard'
 
 const About = () => {
-  const sm = window.innerWidth < 768 ? 12 : 6; // Small window displayes one cell in row
-
   const aboutDialog = {
     title: "חוק שכר שווה",
     content:
@@ -40,12 +38,13 @@ const About = () => {
       </div>
   }
 
+  const sm = window.innerWidth > 600 ? 6 : 12; // Small window displayes one cell in row
   return (
     <div className="about-content">
       <Box sx={{}}>
         <Grid container={true}
               justifyContent="flex-start"
-              rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 4 }} >
+              rowSpacing={3} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
           <Grid item sm={sm} flexGrow={1}>
             <GraphCard graphLink="https://data.oecd.org/chart/7aNj"
                        previewImage={genderPayGap}
@@ -60,12 +59,6 @@ const About = () => {
                        graphTitle="Gender_wage_gap_2008_2022"
                        graphLinkCaption="OECD Chart: Gender wage gap, Employees, Percentage, Annual, 2008 – latest" />
           </Grid>
-          {window.innerWidth >= 768 && (
-            <Grid item sm={12} flexGrow={1}>
-              <GraphCard previewImage={israel}
-                         textDialog={aboutDialog} />
-            </Grid>
-           )}
            <Grid item sm={sm} flexGrow={1}>
              <GraphCard graphLink="https://genderdata.worldbank.org/indicators/sl-emp-smgt-fe-zs/?geos=ISR&view=trend"
                         previewImage={womenInManagement}
@@ -73,21 +66,18 @@ const About = () => {
                         graphTitle="Gender_wage_gap_2022"
                         graphLinkCaption="Employment in senior and middle management, female (%)"
                         imageSrc={womenInManagementFullSize} />
-           </Grid>
-           <Grid item sm={sm} flexGrow={1}>
-             <GraphCard graphLink="https://data.oecd.org/chart/7aPd"
+          </Grid>
+          <Grid item sm={sm} flexGrow={1}>
+            <GraphCard graphLink="https://data.oecd.org/chart/7aPd"
                        previewImage={womenInPolitics}
                        cardTitle="4. ייצוג נשים בפוליטיקה הישראלית מהנמוכים במדינות ה-OECD"
                        graphTitle="Gender_politics_2022"
                        graphLinkCaption="OECD Chart: Women in politics, Women parliamentarians, Percentage, Annual, 2022 or latest available" />
-           </Grid>
-           {window.innerWidth < 768 && (
-             <Grid item sm={12} flexGrow={1}>
-               <GraphCard previewImage={israel}
-                          cardTitle="אז מה הפתרון?"
-                          textDialog={aboutDialog} />
-             </Grid>
-            )}
+          </Grid>
+          <Grid item sm={12} flexGrow={1}>
+            <GraphCard cardTitle="אז מה הפתרון?"
+                       textDialog={aboutDialog} />
+          </Grid>
         </Grid>
       </Box>
     </div>

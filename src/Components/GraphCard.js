@@ -10,6 +10,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import logo from '../assets/logo.png';
 
 const GraphCard = (props) => {
   const { graphLink, previewImage, cardTitle, graphTitle, graphLinkCaption, imageSrc, textDialog } = props;
@@ -19,49 +20,58 @@ const GraphCard = (props) => {
     setShowDialog(!showDialog);
   };
 
-  const card = window.innerWidth < 768 ?
-  (
-    <Card sx={{ minWidth: "90%",
-                margin: "0 auto",
-                borderRadius: "8px" }}
-          onClick={handleCardClick} >
-      <CardActionArea sx={{ minWidth: "100%" }}>
-        {cardTitle && (
-          <CardContent sx={{ display: "flex" }}>
-            <Typography variant="h7" color="text.secondary" sx={{ fontWeight: 'bold', flexGrow: 1, marginLeft: "4px" }} >
-              {cardTitle}
-            </Typography>
-            <OpenInNewIcon color="action" fontSize="small"/>
-            </CardContent>
-        )}
-      </CardActionArea>
-    </Card>
-  )
-  :
-  (
-    <Card sx={{ maxWidth: 345,
-                margin: "0 auto",
-                borderRadius: "8px",
-                boxShadow: "0px 2px 8px 6px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);" }}
-          onClick={handleCardClick} >
-      <CardActionArea>
-        <CardMedia
-          sx={{ width: "100%", height: 170 }}
-          component="img"
-          src={previewImage}
-          alt=""
-        />
-        {cardTitle && (
-          <CardContent sx={{ display: "flex" }}>
-            <Typography variant="h7" color="text.secondary" sx={{ fontWeight: 'bold', flexGrow: 1, marginLeft: "4px" }} >
-              {cardTitle}
-            </Typography>
-            <OpenInNewIcon color="action" fontSize="small"/>
-            </CardContent>
-        )}
-      </CardActionArea>
-    </Card>
-  )
+  let cardMinWidth = 0;
+  if (window.innerWidth <= 600) {
+    cardMinWidth = "300px";
+  }
+  if (window.innerWidth <= 300) {
+    cardMinWidth = "auto";
+  }
+  const card = (
+    <Card sx={{
+                  width: "80%",
+                  minWidth: cardMinWidth,
+                  margin: "0 auto",
+                  borderRadius: "8px",
+                  boxShadow: "0px 2px 8px 6px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);" }}
+            onClick={handleCardClick} >
+        <CardActionArea sx={{ }} >
+          {previewImage && window.innerWidth > 600 && (
+            <CardMedia
+              sx={{
+                maxWidth: "100%",
+                margin: "0 auto"
+              }}
+              component="img"
+              src={previewImage}
+              alt="" />
+          )}
+          {cardTitle && (
+            <CardContent sx={{ display: "flex",
+                               alignItems: "center",
+                               height: "fit-content" }}>
+              {!previewImage && (
+                <CardMedia
+                  sx={{
+                    maxWidth: "40px",
+                    margin: "0 auto"
+                  }}
+                  component="img"
+                  src={logo}
+                  alt="" />
+              )}
+              <Typography
+                sx={{ fontWeight: 'bold', flexGrow: 1, marginLeft: "8px" }}
+                variant={!previewImage ? "subtitle1" : "h7"}
+                color="text.secondary" >
+                {cardTitle}
+              </Typography>
+              <OpenInNewIcon color="action" fontSize="small" />
+              </CardContent>
+          )}
+        </CardActionArea>
+      </Card>
+    )
 
   return (
     <div>
@@ -110,7 +120,7 @@ const GraphCard = (props) => {
 
 GraphCard.propTypes = {
   graphLink: PropTypes.string,
-  previewImage: PropTypes.string.isRequired,
+  previewImage: PropTypes.string,
   cardTitle: PropTypes.string,
   graphTitle: PropTypes.string,
   graphLinkCaption: PropTypes.string,
