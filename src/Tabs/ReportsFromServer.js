@@ -16,7 +16,7 @@ const api = axios.create({
 });
 
 const Reports = () => {
-  const { reportListLoaded, reportsList } = useReportList();
+  const { reportListLoaded, reportsList, cachedReports } = useReportList();
 
   // Fetch single pdf report.
   const { setDisplayedReportUrl, setDisplayedReportPdfFile,
@@ -49,10 +49,15 @@ const Reports = () => {
     try {
       setDisplayedReportPdfFile(null);
       setDisplayedReportUrlBlob(null);
-      const response = await api.get("/api/fetchPdf", {
-        params: { url: report.reportUrl },
-        responseType: "arraybuffer",
-      });
+      let response;
+      if (cachedReports.has(report.reportUrl) && cachedReports.get(report.reportUrl)) {
+        response = cachedReports.get(report.reportUrl);
+      } else {
+        response = await api.get("/api/fetchPdf", {
+          params: { url: report.reportUrl },
+          responseType: "arraybuffer",
+        });
+      }
 
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.toLowerCase().includes("pdf")) {
