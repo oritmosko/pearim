@@ -16,18 +16,17 @@ const api = axios.create({
 });
 
 const Reports = () => {
-  // Large screens configuration with Pdf viewer.
-  const { reportListLoaded } = useReportList();
+  const { reportListLoaded, reportsList } = useReportList();
 
   // Fetch single pdf report.
   const { setDisplayedReportUrl, setDisplayedReportPdfFile,
           setDisplayedReportUrlBlob, setDisplayedReportPageNum,
           displayedReportUrl, displayedReportPdfFile,
           displayedReportUrlBlob } = useDisplayedReportPdf();
-  const [loading, setLoading] = useState(false);
+  const [loadingReport, setLoadingReport] = useState(false);
 
   const handleFetchReport = async (report, pageNum = 0) => {
-    setLoading(true);
+    setLoadingReport(true);
     const defaultPageNum = report.hasOwnProperty("page") ? report.page : 0;
     setDisplayedReportPageNum(pageNum > 0 ? pageNum : defaultPageNum);
     setDisplayedReportUrl(report.reportUrl);
@@ -43,7 +42,7 @@ const Reports = () => {
         setDisplayedReportUrlBlob(tmpUrlBlob);
         setDisplayedReportPdfFile(tmpPdfFile);
       }
-      setLoading(false);
+      setLoadingReport(false);
       return;
     }
     // Reprot url changed.
@@ -58,7 +57,7 @@ const Reports = () => {
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.toLowerCase().includes("pdf")) {
         setDisplayedReportPdfFile(null);
-        setLoading(false);
+        setLoadingReport(false);
         return;
       }
 
@@ -68,11 +67,11 @@ const Reports = () => {
       reader.readAsDataURL(pdfBlob);
       reader.onloadend = (e) => {
         setDisplayedReportPdfFile(e.target.result);
-        setLoading(false);
+        setLoadingReport(false);
       }
     } catch (error) {
       setDisplayedReportPdfFile(null);
-      setLoading(false);
+      setLoadingReport(false);
     }
   };
 
@@ -84,19 +83,7 @@ const Reports = () => {
   }, [chosenReport, chosenReportPage]);
 
   // Small screen configuration, only with collapsible list of reports.
-  const [reportsList, setReportsList] = useState([]);
-  useEffect(() => {
-    if (window.innerWidth < 768) {
-      setLoading(true);
-      new Promise(resolve => setTimeout(resolve, 23))
-        .then(() =>
-          api.get("/api/fetchReportsJson")
-            .then(response => setReportsList(response.data))
-            .catch(error => console.error("Error loading JSON:", error))
-            .finally(() => setLoading(false)));
-    }
-  }, []);
-  const handleItemClick = (report, pageNum) => {
+  const onReportChosen = (report, pageNum) => {
     window.open(report.reportUrl, "_blank");
   };
 
@@ -110,9 +97,9 @@ const Reports = () => {
   (
     <div className="reports-list-container">
       <CollapsibleCategorizedList reports={reportsList}
-                                  onClickCallback={(report, pageNum = 0) => handleItemClick(report, pageNum)}
+                                  onClickCallback={(report, pageNum = 0) => onReportChosen(report, pageNum)}
                                   renderMorePages={false}/>
-      {loading && (
+      {!reportListLoaded && (
         <div className="loader">
           <img src={logo} alt="" />
         </div>
@@ -122,7 +109,7 @@ const Reports = () => {
   (
     <div className="reports-content">
       <div className="selected-item">
-        {loading && (
+        {loadingReport && (
           <div className="loader">
             <img src={logo} alt=""
                  className="image-container" />
@@ -131,7 +118,7 @@ const Reports = () => {
         {displayedReportUrlBlob && (
           <div className="pdf-file-container">
             {displayedReportUrl && (
-              <p> לדו"ח המקורי
+              <p> לדו"ח המקורי&nbsp;
                 <a href={displayedReportUrl}
                    target="_blank" rel="noopener noreferrer"
                    className="link">
@@ -142,7 +129,7 @@ const Reports = () => {
             <PDFViewer />
           </div>
         )}
-        {!loading && !displayedReportUrlBlob && displayedReportUrl && (
+        {!loadingReport && !displayedReportUrlBlob && displayedReportUrl && (
           <p> לא ניתן לטעון את הדו"ח, ניתן לצפות בו ישירות ב
             <a href={displayedReportUrl}
                target="_blank" rel="noopener noreferrer"
@@ -151,7 +138,7 @@ const Reports = () => {
             </a>
           </p>
         )}
-        {reportListLoaded && !loading && !displayedReportUrlBlob && (
+        {!loadingReport && !displayedReportUrlBlob && !displayedReportUrl && reportListLoaded && (
           <img src={logo} alt=""
                className="image-container start"
                onClick={(e) => runLogoAnimation(e)} />

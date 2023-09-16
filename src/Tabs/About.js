@@ -1,87 +1,73 @@
 import React from 'react';
 import './About.css';
 
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-
-import genderPayGap from '../assets/gender-pay-gap.png';
-import genderPayGapLong from '../assets/gender-pay-gap-long.png';
-import womenInPolitics from '../assets/women-in-politics.png';
-import womenInManagement from '../assets/women_in_management.png';
-import womenInManagementFullSize from '../assets/women_in_management_full_size.png';
-// import israel from '../assets/israel1.png';
-import GraphCard from '../Components/GraphCard'
+import A1 from './Answers/A1'
+import A2 from './Answers/A2'
+import A3 from './Answers/A3'
+import A4 from './Answers/A4'
+import A5 from './Answers/A5'
+import A6 from './Answers/A6'
+import A7 from './Answers/A7'
+import A8 from './Answers/A8'
 
 const About = () => {
-  const aboutDialog = {
-    title: "חוק שכר שווה",
-    content:
+  const qAndAData = [
+    {
+      question: 'קצת נתונים לגבי הבעיה',
+      answer: <A1 />
+    },
+    {
+      question: 'כיצד ניסו לפתור אותה?',
+      answer: <A2 />
+    },
+    {
+      question: 'מה קורה בפועל?',
+      answer: <A3 />
+    },
+    {
+      question: 'מה בכל זאת ניתן לקרוא בדוחות?',
+      answer: <A4 />
+    },
+    {
+      question: 'כמה ממצאים מהדוחות',
+      answer: <A5 />
+    },
+    {
+      question: 'אז מה חסר, מה אפשר לעשות אחרת כדי שהדוחות יעשו את השינוי שצריך?',
+      answer: <A6 />
+    },
+    {
+      question: 'מה המטרה של האתר?',
+      answer: <A7 />
+    },
+    {
+      question: 'רגע, אז יש פה את כל הדוחות שפורסמו?',
+      answer: <A8 />
+    },
+    {
+      question: 'מספר מעניין - 518. למה דווקא זה?',
+      answer:
       <div>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          ביום 25.08.2020, התקבל תיקון מס' 6 לחוק שכר שווה, ולפיו על מעסיק שמעסיק למעלה מ- 518 עובדים חלה עליו חובה להפיק מדי שנה 2 דוחות (דוח פנימי ופומבי), המפרטים את פערי השכר במקום העבודה בין גברים לנשים וכן למסור הודעה לעובד/ת בדבר פערי השכר.
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          בעמוד <a href="#reports"
-                    className="link"
-                    onClick={() => {document.getElementsByClassName("reports")[0].click()}}>
-                    הדוחות
-                 </a> תמצאו דוחות רבים של חברות ממשלתיות, גופים ציבוריים, הייטק, נדלן, בנקים ועוד.
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        בעמוד <a href="#reports"
-                  className="link"
-                  onClick={() => {document.getElementsByClassName("qna")[0].click()}}>
-                  על הדוח
-                  </a> תוכלו למצוא הסבר על הדוחות, מה יש ומה חסר.
-        </Typography>
+        <p className="qna-answer">
+          <a href='https://www.globes.co.il/news/article.aspx?did=1001340473' className="link" target='_blank' rel="noopener noreferrer">כי מאה פעמים חמסה ועוד ח"י.</a>
+        </p>
+        <p className="qna-answer">
+          עוד חשוב לשים לב, כי באותה כתבה מצויין כי "החוק יחול על 180 מעסיקים גדולים, בפיילוט לשלוש שנים, שבסיומו יוחלט אם להרחיבו" - ורצוי שירחיבו! כך כתוב, כי אם ישנו את מספר הקסם 518 ל-100, נזכה לשקיפות בפערי השכר בקרוב ל-3000 חברות.
+        </p>
       </div>
-  }
+    },
+  ];
 
-  const sm = window.innerWidth > 600 ? 6 : 12; // Small window displayes one cell in row
   return (
     <div className="about-content">
-      <Box sx={{}}>
-        <Grid container={true}
-              justifyContent="flex-start"
-              rowSpacing={3} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
-          <Grid item sm={sm} flexGrow={1}>
-            <GraphCard graphLink="https://data.oecd.org/chart/7aNj"
-                       previewImage={genderPayGap}
-                       cardTitle="1. פערי השכר בין נשים לגברים בישראל מהגבוהים במדינות ה-OECD"
-                       graphTitle="Gender_wage_gap_2022"
-                       graphLinkCaption="OECD Chart: Gender wage gap, Employees, Percentage, Annual, 2022 or latest available" />
-          </Grid>
-          <Grid item sm={sm} flexGrow={1}>
-            <GraphCard graphLink="https://data.oecd.org/chart/7aNk"
-                       previewImage={genderPayGapLong}
-                       cardTitle="2. הפערים רק גדלים"
-                       graphTitle="Gender_wage_gap_2008_2022"
-                       graphLinkCaption="OECD Chart: Gender wage gap, Employees, Percentage, Annual, 2008 – latest" />
-          </Grid>
-           <Grid item sm={sm} flexGrow={1}>
-             <GraphCard graphLink="https://genderdata.worldbank.org/indicators/sl-emp-smgt-fe-zs/?geos=ISR&view=trend"
-                        previewImage={womenInManagement}
-                        cardTitle="3. ייצוג הנשים בעמדות הנהלה עומד על כ30%"
-                        graphTitle="Gender_wage_gap_2022"
-                        graphLinkCaption="Employment in senior and middle management, female (%)"
-                        imageSrc={womenInManagementFullSize} />
-          </Grid>
-          <Grid item sm={sm} flexGrow={1}>
-            <GraphCard graphLink="https://data.oecd.org/chart/7aPd"
-                       previewImage={womenInPolitics}
-                       cardTitle="4. ייצוג נשים בפוליטיקה הישראלית מהנמוכים במדינות ה-OECD"
-                       graphTitle="Gender_politics_2022"
-                       graphLinkCaption="OECD Chart: Women in politics, Women parliamentarians, Percentage, Annual, 2022 or latest available" />
-          </Grid>
-          <Grid item sm={12} flexGrow={1}>
-            <GraphCard cardTitle="אז מה הפתרון?"
-                       textDialog={aboutDialog} />
-          </Grid>
-        </Grid>
-      </Box>
+      {qAndAData.map((item, index) => (
+        <div key={index} className="qna-item">
+          <h3 className="qna-question">{item.question}</h3>
+          {item.answer}
+        </div>
+      ))}
     </div>
-  )
+  );
 };
 
 export default About;

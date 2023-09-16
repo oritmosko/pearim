@@ -1,0 +1,16 @@
+.open-dialog:hover {
+  cursor: pointer;
+}
+
+.open-icon {
+  margin-right: 8px;
+  vertical-align: text-top;
+}
+
+.caption-separator {
+  font-size: 0;
+}
+
+.graph-caption {
+  direction: ltr;
+}

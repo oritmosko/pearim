@@ -1,7 +1,7 @@
 import React from 'react';
-import './Missing.css';
+import './Contact.css';
 
-const Missing = () => {
+const Contact = () => {
   return (
     <div>
       <iframe
@@ -15,4 +15,4 @@ const Missing = () => {
   );
 };
 
-export default Missing;
+export default Contact;

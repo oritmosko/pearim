@@ -1,4 +1,37 @@
 .about-content {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: right;
+}
+
+.qna-item {
+  /* border: 1px solid #ccc; */
+  padding: 0 20px;
+  border-radius: 8px;
+  box-shadow: 0 0px 0.5px rgba(0, 0, 0, 0.1);
+}
+
+.qna-question {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.qna-answer {
+  margin: 8px 0;
+}
+
+.qna-answer li {
+  margin-top: 8px;
+}
+
+.link {
+  color: #61dafb;
+}
+
+/* .about-content {
   padding-top: 20px;
   max-width: 800px;
   margin: 0 auto;
@@ -10,4 +43,4 @@
 
 .about-content .MuiSkeleton-root {
   margin: 0 auto;
-}
+} */
