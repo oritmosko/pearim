@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './AppTabs.css';
 
 import About from './Tabs/About';
 import Contact from './Tabs/Contact';

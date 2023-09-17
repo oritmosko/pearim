@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 import { ChosenReportProvider } from './Context/ChosenReportContext';
 import { DisplayedReportPdfProvider } from './Context/DisplayedReportPdfContext';
