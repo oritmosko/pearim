@@ -84,7 +84,7 @@ body {
 }
 @media (max-width: 485px) {
   .tabs {
-    font-size: 14px;
+    /* font-size: 14px; */
     text-wrap: wrap;
   }
 }
