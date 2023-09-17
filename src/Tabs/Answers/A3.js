@@ -13,8 +13,7 @@ const A3 = () => {
         <a href='https://www.gov.il/BlobFolder/generalpage/employers-publish-pay-gap/he/shivion_equal-opportunities-at-work_fix6-instructions230423.pdf'
            className="link"
            target='_blank' rel="noopener noreferrer">כאן.</a>
-        <br />
-        כמה מההנחיות, כלשונן:
+        &nbsp;כמה מההנחיות, כלשונן:
       </p>
       <ol>
         <li>

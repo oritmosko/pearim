@@ -9,6 +9,7 @@ import A5 from './Answers/A5'
 import A6 from './Answers/A6'
 import A7 from './Answers/A7'
 import A8 from './Answers/A8'
+import A9 from './Answers/A9'
 
 const About = () => {
   const qAndAData = [
@@ -46,15 +47,7 @@ const About = () => {
     },
     {
       question: 'מספר מעניין - 518. למה דווקא זה?',
-      answer:
-      <div>
-        <p className="qna-answer">
-          <a href='https://www.globes.co.il/news/article.aspx?did=1001340473' className="link" target='_blank' rel="noopener noreferrer">כי מאה פעמים חמסה ועוד ח"י.</a>
-        </p>
-        <p className="qna-answer">
-          עוד חשוב לשים לב, כי באותה כתבה מצויין כי "החוק יחול על 180 מעסיקים גדולים, בפיילוט לשלוש שנים, שבסיומו יוחלט אם להרחיבו" - ורצוי שירחיבו! כך כתוב, כי אם ישנו את מספר הקסם 518 ל-100, נזכה לשקיפות בפערי השכר בקרוב ל-3000 חברות.
-        </p>
-      </div>
+      answer: <A9 />
     },
   ];
 
@@ -62,7 +55,7 @@ const About = () => {
     <div className="about-content">
       {qAndAData.map((item, index) => (
         <div key={index} className="qna-item">
-          <h3 className="qna-question">{item.question}</h3>
+          <h3 className="question">{item.question}</h3>
           {item.answer}
         </div>
       ))}

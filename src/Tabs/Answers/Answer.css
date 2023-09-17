@@ -9,3 +9,13 @@
 .link {
   color: #61dafb;
 }
+
+@media (max-width: 768px) {
+  .answer ol {
+    padding-right: 0px;
+  }
+
+  .answer li {
+    margin-right: 25px;
+  }
+}
