@@ -1,5 +1,4 @@
 import React from 'react';
-import './PdfViewer.css';
 
 import { renderToolbar } from './PdfViewerDefaultLayoutPluginInstance'
 import { useDisplayedReportPdf } from '../Context/DisplayedReportPdfContext';

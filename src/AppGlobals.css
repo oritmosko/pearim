@@ -1,0 +1,19 @@
+:root {
+  --smallest-screen: 485px;
+  --tablet-screen: 868px;
+  --desktop-screen: 1280px;
+
+  --background-color-dark: #f2f2f2; /* Dark grey */
+  --background-color-light: #f7f7f7; /* Light grey */
+
+  --title-color: #008080; /* Deeper green  */
+  --tab-highlight-color: #1abc9c; /* Light green */
+  --divider-color: #ccc;
+
+  --main-page-icon-size-large: 100px;
+  --main-page-icon-size-small: 60px;
+
+  --link-color: #61dafb;
+
+  --primary-color: black;
+}

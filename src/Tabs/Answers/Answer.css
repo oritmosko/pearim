@@ -1,3 +1,5 @@
+@import '../../AppGlobals.css';
+
 .answer {
   margin: 8px 0;
 }
@@ -7,10 +9,10 @@
 }
 
 .link {
-  color: #61dafb;
+  color: var(--link-color);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 868px) { /* MID_TABLET_SCREEN */
   .answer ol {
     padding-right: 0px;
   }
@@ -18,4 +20,9 @@
   .answer li {
     margin-right: 25px;
   }
+}
+
+.answer.row {
+  display: flex;
+  align-items: center;
 }

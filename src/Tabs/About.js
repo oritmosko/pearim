@@ -1,6 +1,7 @@
 import React from 'react';
 import './About.css';
 
+import A0 from './Answers/A0'
 import A1 from './Answers/A1'
 import A2 from './Answers/A2'
 import A3 from './Answers/A3'
@@ -13,6 +14,10 @@ import A9 from './Answers/A9'
 
 const About = () => {
   const qAndAData = [
+    {
+      question: '',
+      answer: <A0 />
+    },
     {
       question: 'קצת נתונים לגבי הבעיה',
       answer: <A1 />

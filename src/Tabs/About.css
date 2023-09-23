@@ -1,9 +1,20 @@
 .about-content {
   display: flex;
   flex-direction: column;
-  max-width: 800px;
-  margin: 0 auto;
   text-align: right;
+  max-width: 1200px;
+  margin-right: 400px;
+  margin-left: 10px;
+}
+@media (max-width: 1280px) { /* MAX_TABLET_SCREEN */
+  .about-content {
+    margin-right: 370px;
+  }
+}
+@media (max-width: 868px) { /* MID_TABLET_SCREEN */
+  .about-content {
+    margin: 0 auto;
+  }
 }
 
 .qna-item {
@@ -15,6 +26,11 @@
   .qna-item {
     padding: 0 15px;
   }
+}
+.qna-item:first-child {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
 }
 
 .question {

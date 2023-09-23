@@ -4,6 +4,7 @@ import './Reports.css';
 import axios from 'axios';
 import CollapsibleCategorizedList from '../Components/CollapsibleCategorizedList';
 import PDFViewer from '../Components/PdfViewer';
+import { MID_TABLET_SCREEN } from '../AppScreenSizes';
 import { SERVER_PATH } from '../Config/ServerConfig';
 import { useChosenReport } from '../Context/ChosenReportContext';
 import { useDisplayedReportPdf } from '../Context/DisplayedReportPdfContext';
@@ -98,7 +99,8 @@ const Reports = () => {
     e.target.classList.add("start");
   }
 
-  return window.innerWidth < 768 ?
+  // Smaller screen show only list of reports.
+  return window.innerWidth < MID_TABLET_SCREEN ?
   (
     <div className="reports-list-container">
       <CollapsibleCategorizedList reports={reportsList}
