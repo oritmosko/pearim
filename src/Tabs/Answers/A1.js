@@ -21,7 +21,7 @@ const A1 = () => {
                       graphLinkCaption="OECD Chart: Gender wage gap, Employees, Percentage, Annual, 2012 – latest" />
         </li>
         <li>
-          <DialogLink linkText="לפי הבנק העולמי, ייצוג הנשים בעמדות הנהלה עומד על כ30%"
+          <DialogLink linkText="לפי הבנק העולמי, ייצוג הנשים בעמדות הנהלה עומד על כ-30%"
                       graphLink="https://genderdata.worldbank.org/indicators/sl-emp-smgt-fe-zs/?geos=ISR&view=trend"
                       graphTitle="Gender_wage_gap_2022"
                       graphLinkCaption="Employment in senior and middle management, female (%)"

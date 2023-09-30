@@ -23,7 +23,7 @@ const About = () => {
       answer: <A1 />
     },
     {
-      question: 'מה הפתרון?',
+      question: 'מה קורה בפועל?',
       answer:
         <div>
           <A2 />
