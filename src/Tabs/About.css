@@ -27,11 +27,6 @@
     padding: 0 15px;
   }
 }
-.qna-item:first-child {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 2px;
-}
 
 .question {
   font-weight: bold;

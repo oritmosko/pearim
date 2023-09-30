@@ -12,17 +12,16 @@
   color: var(--link-color);
 }
 
+.answer b {
+  font-weight: 500;
+}
+
 @media (max-width: 868px) { /* MID_TABLET_SCREEN */
-  .answer ol {
+  .answer ul {
     padding-right: 0px;
   }
 
   .answer li {
     margin-right: 25px;
   }
-}
-
-.answer.row {
-  display: flex;
-  align-items: center;
 }

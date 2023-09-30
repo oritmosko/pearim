@@ -15,33 +15,33 @@ import A9 from './Answers/A9'
 const About = () => {
   const qAndAData = [
     {
-      question: '',
+      question: 'אמ;לק',
       answer: <A0 />
     },
     {
-      question: 'קצת נתונים לגבי הבעיה',
+      question: 'מה הבעיה?',
       answer: <A1 />
     },
     {
-      question: 'כיצד ניסו לפתור אותה?',
-      answer: <A2 />
+      question: 'מה הפתרון?',
+      answer:
+        <div>
+          <A2 />
+          <A3 />
+        </div>
     },
     {
-      question: 'מה קורה בפועל?',
-      answer: <A3 />
-    },
-    {
-      question: 'מה בכל זאת ניתן לקרוא בדוחות?',
+      question: 'מה בכל זאת ניתן להבין מהדוחות?',
       answer: <A4 />
     },
     {
       question: 'כמה ממצאים מהדוחות',
       answer: <A5 />
     },
-    {
-      question: 'אז מה חסר, מה אפשר לעשות אחרת כדי שהדוחות יעשו את השינוי שצריך?',
-      answer: <A6 />
-    },
+    // {
+    //   question: 'אז מה חסר, מה אפשר לעשות אחרת כדי שהדוחות יעשו את השינוי שצריך?',
+    //   answer: <A6 />
+    // },
     {
       question: 'מה המטרה של האתר?',
       answer: <A7 />
