@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/hello-world-app-frontend/static/css/main.7d7a34fd.css",
-    "main.js": "/hello-world-app-frontend/static/js/main.13c7234e.js",
+    "main.js": "/hello-world-app-frontend/static/js/main.d71d9c3b.js",
     "static/media/logo.png": "/hello-world-app-frontend/static/media/logo.f00a5bec9be7cd5e814d.png",
     "static/media/women_in_management_full_size.png": "/hello-world-app-frontend/static/media/women_in_management_full_size.8b4f4f6a6bb82db22cdd.png",
     "index.html": "/hello-world-app-frontend/index.html"
   },
   "entrypoints": [
     "static/css/main.7d7a34fd.css",
-    "static/js/main.13c7234e.js"
+    "static/js/main.d71d9c3b.js"
   ]
 }
