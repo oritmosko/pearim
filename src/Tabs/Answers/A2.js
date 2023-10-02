@@ -16,6 +16,13 @@ const A2 = () => {
         <a href='https://www.kolzchut.org.il/he/%D7%97%D7%95%D7%91%D7%AA_%D7%9E%D7%A2%D7%A1%D7%99%D7%A7%D7%99%D7%9D_%D7%9C%D7%A4%D7%A8%D7%A1%D7%9D_%D7%9E%D7%99%D7%93%D7%A2_%D7%91%D7%93%D7%91%D7%A8_%D7%A4%D7%A2%D7%A8%D7%99_%D7%94%D7%A9%D7%9B%D7%A8_%D7%91%D7%99%D7%9F_%D7%92%D7%91%D7%A8%D7%99%D7%9D_%D7%9C%D7%A0%D7%A9%D7%99%D7%9D'
            className="link"
            target='_blank' rel="noopener noreferrer">כאן.</a>
+        <br />
+        <br />
+        מבחינת אכיפה - אין כזו. ככתוב ב
+        <a href='https://main.knesset.gov.il/activity/legislation/laws/pages/lawbill.aspx?t=lawreshumot&lawitemid=2085992'
+           className="link"
+           target='_blank' rel="noopener noreferrer">הצעת החוק</a>
+        &nbsp;"בשלב זה הצעת החוק אינה כוללת סנקציה כספית או אחרת על מעסיקים שיציגו פערי שכר מגדריים בארגון. יחד עם זאת, לעצם איסוף החומרים, הכנת הדו"ח השנתי ופרסומו תהיה השפעה שתניע את החברות לפעולה ולשינוי".
       </p>
     </div>
   )

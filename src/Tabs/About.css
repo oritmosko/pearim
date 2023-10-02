@@ -28,6 +28,10 @@
   }
 }
 
+.qna-item:last-child {
+  padding-bottom: 36px;
+}
+
 .question {
   font-weight: bold;
   margin-bottom: 6px;
