@@ -1,7 +1,7 @@
 {
-  "name": "hello-world-app-tabs",
+  "name": "pearim",
   "version": "0.1.0",
-  "homepage": "https://oritmosko.github.io/hello-world-app-frontend",
+  "homepage": "https://oritmosko.github.io/pearim",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
