@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/pearim/static/css/main.671a5688.css",
-    "main.js": "/pearim/static/js/main.7cc64b91.js",
+    "main.js": "/pearim/static/js/main.70b39dc6.js",
     "static/media/logo.png": "/pearim/static/media/logo.f00a5bec9be7cd5e814d.png",
     "static/media/women_in_management_full_size.png": "/pearim/static/media/women_in_management_full_size.8b4f4f6a6bb82db22cdd.png",
     "index.html": "/pearim/index.html"
   },
   "entrypoints": [
     "static/css/main.671a5688.css",
-    "static/js/main.7cc64b91.js"
+    "static/js/main.70b39dc6.js"
   ]
 }
